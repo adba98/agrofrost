@@ -19,8 +19,29 @@ export class NavbarComponent implements OnInit {
     {
       name: 'Posters',
       path: '/posts'
+    },
+    {
+      name: 'Caracteriticas ',
+      path: '/feautures'
+    },
+    {
+      name: 'Planes ',
+      path: '/pricing'
     }
+  ];
+  auths= [
+    {
+      name: 'Iniciar Sesión',
+      path: '/singin',
+      type: 'primary'
+    },
+    {
+      name: 'Registrarse',
+      path: '/singup',
+      type: 'secondary'
+    },
   ]
+
 
   constructor() { }
 
