@@ -41,7 +41,9 @@
 
         <li class="nav-item" *ngFor="let auth of auths">
           <a
-            class="nav-link active btn btn-outline-primary"
+          [ngClass]="{'btn-outline-primary':auth.type === 'primary',
+          'btn-outline-secondary':auth.type ===  'secondary'}"
+            class="nav-link active btn text-white"
             aria-current="page"
             [routerLink]="auth.path"
             >{{ auth.name }}</a
