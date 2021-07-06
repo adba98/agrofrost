@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  demandas= [{
+
+  }];
+  ofertas =[{
+    imagen: "assets/img/scenery/image5.jpg",
+    titulo: "Arveja de Cabrera"
+
+  }];
+
   constructor() { }
 
   ngOnInit(): void {

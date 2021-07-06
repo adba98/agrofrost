@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PagesModule } from './pages/pages.module';
 import { FooterComponent } from './components/footer/footer.component';
+import { PrivatePagesModule } from './private-pages/private-pages.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FooterComponent } from './components/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PagesModule
+    PagesModule,
+    PrivatePagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

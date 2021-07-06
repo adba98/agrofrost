@@ -30,6 +30,12 @@ const routes: Routes = [
       import('./pages/posts/posts.module').then((m) => m.PostsModule)
   },
   {
+// FIXME: Corregir seccion privada
+    path: 'p', 
+    loadChildren: () =>
+      import('./private-pages/private-pages.module').then((m) => m.PrivatePagesModule)
+  },
+  {
     path: 'singin',
     component: SinginComponent,
   },

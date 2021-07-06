@@ -1,27 +1,38 @@
 <main class="page landing-page">
-    <section class="clean-block clean-hero" style="background-image:url(&quot;assets/img/tech/image4.jpg&quot;);color:rgba(9, 162, 255, 0.85);">
+
+
+    <section class="clean-block clean-hero banner" style="background-image: url('./assets/img/banner/elaine-casap-qgHGDbbSNm8-unsplash.jpg')">
         <div class="text">
-            <h2>Lorem ipsum dolor sit amet.</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p><button class="btn btn-outline-light btn-lg" type="button">Learn More</button>
+            <h2>Conectando el agro con el mundo </h2>
+            <p>Descubre los productos agricolas de Cundinamarca </p>
+            <button class="btn btn-outline-light btn-lg" type="button">Compra o Vende</button>
         </div>
     </section>
+
+
     <section class="clean-block clean-info dark">
         <div class="container">
             <div class="block-heading">
-                <h2 class="text-info">Info</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                <h2 class="text-info">Algunos productos destacados</h2>
+                <p>Disfruta estos producto destacados del dia </p>
             </div>
-            <div class="row align-items-center">
-                <div class="col-md-6"><img class="img-thumbnail" src="assets/img/scenery/image5.jpg"></div>
+
+
+            <!-- Ofertas -->
+            <div class="row align-items-center" *ngFor="let oferta of ofertas">
+                <div class="col-md-6"><img class="img-thumbnail" src="{{oferta.imagen}}"></div>
                 <div class="col-md-6">
-                    <h3>Lorem impsum dolor sit amet</h3>
+                    <h3>{{oferta.titulo}}</h3>
                     <div class="getting-started-info">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     </div><button class="btn btn-outline-primary btn-lg" type="button">Join Now</button>
                 </div>
             </div>
+
         </div>
     </section>
+
+
     <section class="clean-block features">
         <div class="container">
             <div class="block-heading">
@@ -48,6 +59,8 @@
             </div>
         </div>
     </section>
+
+
     <section class="clean-block slider dark">
         <div class="container">
             <div class="block-heading">
@@ -69,6 +82,7 @@
             </div>
         </div>
     </section>
+
     <section class="clean-block about-us">
         <div class="container">
             <div class="block-heading">

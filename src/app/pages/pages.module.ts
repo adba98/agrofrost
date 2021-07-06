@@ -7,6 +7,9 @@ import { SingupComponent } from './singup/singup.component';
 import { SinginComponent } from './singin/singin.component';
 import { PricingComponent } from './pricing/pricing.component';
 
+import { RouterModule, Routes } from '@angular/router';
+
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -17,7 +20,9 @@ import { PricingComponent } from './pricing/pricing.component';
     PricingComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    [RouterModule]
+    
   ], 
   exports: [
     HomeComponent,
@@ -25,7 +30,7 @@ import { PricingComponent } from './pricing/pricing.component';
     FeauturesComponent,
     SingupComponent,
     SingupComponent,
-    PricingComponent
+    PricingComponent,
   ]
 })
 export class PagesModule { }
