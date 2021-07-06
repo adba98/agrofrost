@@ -50,7 +50,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})], // use hash to manage url on firebase
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

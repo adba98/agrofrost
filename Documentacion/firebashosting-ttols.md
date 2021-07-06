@@ -11,6 +11,8 @@ De acuerdo a las opciones seleccionadas pedira
 ## Realtine database
 Seleccionar en que zona desplegar el servidor 
 
+Creeara un archivo firebase.rules.json 
+
 ## Hosting 
 Pedira la carpeta que se hara publica, en el caso, de usar por ejemplo angular debemos correr primero `ng build`, que generar una carpeta *dist*
 
@@ -26,6 +28,14 @@ Para inciar al proceso, pedira la autentiacaión y se almacenara un token
 2. Indicar si existe un comando a ejecutar para copliar antes del despligue, `ng build`
 3. Se puede configurar los flujos de trabajo, ej, si existe un Pull Request, merge (***SE debe etudiar esta sección ya que no se huieron cambios en github, pero no hay cambios de la pagina **)
 
+Creara al final .github y .firebase
+
+
+
+
+10. se debe configurar y revisar el archivor .yarml, despliegeue en github actions, puede indicar un deploy con falla
+
+Creara al final .github y .firebase
 
 
 ## Cloud fuction y Cloud run 
