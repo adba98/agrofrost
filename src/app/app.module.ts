@@ -7,6 +7,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PagesModule } from './pages/pages.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivatePagesModule } from './private-pages/private-pages.module';
+import { AngularFireModule } from '@angular/fire';
+
+
+
 
 @NgModule({
   declarations: [
