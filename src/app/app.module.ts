@@ -7,8 +7,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PagesModule } from './pages/pages.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivatePagesModule } from './private-pages/private-pages.module';
-import { AngularFireModule } from '@angular/fire';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService} from '@angular/fire/analytics';
+import { environment } from '../environments/environment';
 
 
 
@@ -22,9 +24,14 @@ import { AngularFireModule } from '@angular/fire';
     BrowserModule,
     AppRoutingModule,
     PagesModule,
-    PrivatePagesModule
+    PrivatePagesModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAnalyticsModule
   ],
-  providers: [],
+  providers: [
+    UserTrackingService,
+    ScreenTrackingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
