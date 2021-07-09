@@ -12,6 +12,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService} from '@angular/fire/analytics';
 import { environment } from '../environments/environment';
 
+import { AngularFireAuth, AngularFireAuthModule, LANGUAGE_CODE } from '@angular/fire/auth';
+
 
 
 @NgModule({
@@ -26,11 +28,13 @@ import { environment } from '../environments/environment';
     PagesModule,
     PrivatePagesModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAnalyticsModule
+    AngularFireAnalyticsModule,
+    AngularFireAuthModule
   ],
   providers: [
     UserTrackingService,
-    ScreenTrackingService
+    ScreenTrackingService, 
+    { provide: LANGUAGE_CODE, useValue: 'fr' },
   ],
   bootstrap: [AppComponent]
 })
