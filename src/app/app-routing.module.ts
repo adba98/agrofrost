@@ -27,13 +27,15 @@ const routes: Routes = [
   {
     path: 'posts',
     loadChildren: () =>
-      import('./pages/posts/posts.module').then((m) => m.PostsModule)
+      import('./pages/posts/posts.module').then((m) => m.PostsModule),
   },
   {
-// FIXME: Corregir seccion privada
-    path: 'p', 
+    // FIXME: Corregir seccion privada
+    path: 'p',
     loadChildren: () =>
-      import('./private-pages/private-pages.module').then((m) => m.PrivatePagesModule)
+      import('./private-pages/private-pages.module').then(
+        (m) => m.PrivatePagesModule
+      ),
   },
   {
     path: 'singin',
@@ -42,7 +44,7 @@ const routes: Routes = [
   {
     path: 'singup',
     component: SingupComponent,
-  }, 
+  },
   {
     path: '**',
     redirectTo: 'home',
@@ -50,7 +52,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})], // use hash to manage url on firebase
+  imports: [RouterModule.forRoot(routes, { useHash: true })], // use hash to manage url on firebase
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

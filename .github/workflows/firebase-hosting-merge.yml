@@ -2,7 +2,7 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
-'on':
+"on":
   push:
     branches:
       - firebase-hosting
@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
-      - run: npm install 
-      - run: npm run build 
+      - run: npm install
+      - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AGROFROST_A5C31 }}'
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_AGROFROST_A5C31 }}"
           channelId: live
           projectId: agrofrost-a5c31

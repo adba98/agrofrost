@@ -5,16 +5,22 @@
 export const environment = {
   production: false,
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  firebaseConfig : {
-  apiKey: "AIzaSyDsnO2rl8WVWoMhbAt5lTvaCh6Boq58OTk",
-  authDomain: "agrofrost-a5c31.firebaseapp.com",
-  databaseURL: "https://agrofrost-a5c31-default-rtdb.firebaseio.com",
-  projectId: "agrofrost-a5c31",
-  storageBucket: "agrofrost-a5c31.appspot.com",
-  messagingSenderId: "237140780954",
-  appId: "1:237140780954:web:e4a7a86854b68f6efffc23",
-  measurementId: "G-06RF9JV7VW"
- }
+  firebaseConfig: {
+    apiKey: 'AIzaSyDsnO2rl8WVWoMhbAt5lTvaCh6Boq58OTk',
+    authDomain: 'agrofrost-a5c31.firebaseapp.com',
+    databaseURL: 'https://agrofrost-a5c31-default-rtdb.firebaseio.com',
+    projectId: 'agrofrost-a5c31',
+    storageBucket: 'agrofrost-a5c31.appspot.com',
+    messagingSenderId: '237140780954',
+    appId: '1:237140780954:web:e4a7a86854b68f6efffc23',
+    measurementId: 'G-06RF9JV7VW',
+  },
+  gcpApi: {
+    web: {
+      client_id:
+        '66417452803-goil61145cvfq64c2r69fhm4a52l3sb9.apps.googleusercontent.com',
+    },
+  },
 };
 
 /*

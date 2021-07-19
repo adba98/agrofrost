@@ -1,6 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { AngularFireModule } from '@angular/fire';
+import {
+  AngularFireAnalyticsModule,
+  ScreenTrackingService,
+  UserTrackingService,
+} from '@angular/fire/analytics';
+import { environment } from '../environments/environment';
+
+import {
+  AngularFireAuth,
+  AngularFireAuthModule,
+  LANGUAGE_CODE,
+} from '@angular/fire/auth';
+import { HttpClientModule } from '@angular/common/http';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -8,20 +24,8 @@ import { PagesModule } from './pages/pages.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivatePagesModule } from './private-pages/private-pages.module';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService} from '@angular/fire/analytics';
-import { environment } from '../environments/environment';
-
-import { AngularFireAuth, AngularFireAuthModule, LANGUAGE_CODE } from '@angular/fire/auth';
-
-
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    FooterComponent
-  ],
+  declarations: [AppComponent, NavbarComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,13 +33,14 @@ import { AngularFireAuth, AngularFireAuthModule, LANGUAGE_CODE } from '@angular/
     PrivatePagesModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpClientModule,
   ],
   providers: [
     UserTrackingService,
-    ScreenTrackingService, 
+    ScreenTrackingService,
     { provide: LANGUAGE_CODE, useValue: 'fr' },
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

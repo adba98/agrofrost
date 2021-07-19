@@ -3,53 +3,49 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-
   paths = [
     {
       name: 'Inicio',
-      path: '/home'
+      path: '/home',
     },
     {
       name: 'Se Vende',
-      path: '/posts'
+      path: '/posts',
     },
     {
       name: 'Se Compra',
-      path: '/posts'
+      path: '/posts',
     },
     {
       name: 'Nosotros',
-      path: '/about'
+      path: '/about',
     },
     {
       name: 'Caracteriticas ',
-      path: '/feautures'
+      path: '/feautures',
     },
     {
       name: 'Planes ',
-      path: '/pricing'
-    }
+      path: '/pricing',
+    },
   ];
-  auths= [
+  auths = [
     {
       name: 'Iniciar Sesión',
       path: '/singin',
-      type: 'primary'
+      type: 'primary',
     },
     {
       name: 'Registrarse',
       path: '/singup',
-      type: 'secondary'
+      type: 'secondary',
     },
-  ]
+  ];
 
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

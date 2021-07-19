@@ -2,20 +2,22 @@
   class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar"
 >
   <div class="container">
-   
-      <a id="brand-logo" class="navbar-brand logo"  [routerLink]="'/home'">
-        <img src="./assets/img/logos/logo-st.png" width="auto" height="50" alt="Agrofrost Logo" />
-        <div id="brand-logo-texto">
-          <div>
-            Agrofrost
-          </div>
-          <div id="eslogan">
-            Conectando el agro <br>
-            con el mundo
-          </div>
+    <a id="brand-logo" class="navbar-brand logo" [routerLink]="'/home'">
+      <img
+        src="./assets/img/logos/logo-st.png"
+        width="auto"
+        height="50"
+        alt="Agrofrost Logo"
+      />
+      <div id="brand-logo-texto">
+        <div>Agrofrost</div>
+        <div id="eslogan">
+          Conectando el agro <br />
+          con el mundo
         </div>
-        </a>
-     
+      </div>
+    </a>
+
     <button
       data-bs-toggle="collapse"
       class="navbar-toggler"
@@ -41,8 +43,10 @@
 
         <li class="nav-item" *ngFor="let auth of auths">
           <a
-          [ngClass]="{'btn-outline-primary':auth.type === 'primary',
-          'btn-outline-secondary':auth.type ===  'secondary'}"
+            [ngClass]="{
+              'btn-outline-primary': auth.type === 'primary',
+              'btn-outline-secondary': auth.type === 'secondary'
+            }"
             class="nav-link active btn text-white"
             aria-current="page"
             [routerLink]="auth.path"

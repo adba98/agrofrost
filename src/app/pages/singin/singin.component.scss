@@ -1,3 +1,9 @@
-//@import '~/firebaseui/dist/firebaseui';
-@import url('https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css');
-.t{}
+.federado {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &_btn {
+    background-color: red;
+  }
+}

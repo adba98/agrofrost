@@ -4,14 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PrivatePagesRoutingModule } from './private-pages-routing.module';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 
-
 @NgModule({
-  declarations: [
-    PostDetailComponent
-  ],
-  imports: [
-    CommonModule,
-    PrivatePagesRoutingModule
-  ]
+  declarations: [PostDetailComponent],
+  imports: [CommonModule, PrivatePagesRoutingModule],
 })
-export class PrivatePagesModule { }
+export class PrivatePagesModule {}

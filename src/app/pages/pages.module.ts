@@ -8,7 +8,7 @@ import { SinginComponent } from './singin/singin.component';
 import { PricingComponent } from './pricing/pricing.component';
 
 import { RouterModule, Routes } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,11 +19,7 @@ import { RouterModule, Routes } from '@angular/router';
     SinginComponent,
     PricingComponent,
   ],
-  imports: [
-    CommonModule,
-    [RouterModule]
-    
-  ], 
+  imports: [CommonModule, [RouterModule], FormsModule],
   exports: [
     HomeComponent,
     AboutComponent,
@@ -31,6 +27,6 @@ import { RouterModule, Routes } from '@angular/router';
     SingupComponent,
     SingupComponent,
     PricingComponent,
-  ]
+  ],
 })
-export class PagesModule { }
+export class PagesModule {}

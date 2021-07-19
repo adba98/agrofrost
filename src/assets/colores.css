@@ -11,10 +11,10 @@
 }
 
 :root {
-    --greenDark: #339966;  /*primary #0d6efd*/
-    --greenLigth: #99cc99;  /*primary #0d6efd*/
-    --white: #ffffff;
-  }
+  --greenDark: #339966; /*primary #0d6efd*/
+  --greenLigth: #99cc99; /*primary #0d6efd*/
+  --white: #ffffff;
+}
 
 /*clean*/
 
@@ -25,15 +25,16 @@
 }
 .clean-block.blue {
   /* background-color:  #0d6efd; */
-  background-color:   var(--greenDark);;
+  background-color: var(--greenDark);
   color: #fff;
 }
 
-.clean-pricing-item .price h4, .clean-pricing-item .price .h4{
-    color:var(--greenLigth);
+.clean-pricing-item .price h4,
+.clean-pricing-item .price .h4 {
+  color: var(--greenLigth);
 }
 
-.clean-pricing-item{
+.clean-pricing-item {
   border-top: 2px solid var(--greenDark);
 }
 .clean-block.clean-form form {
@@ -45,38 +46,39 @@
 .clean-block.clean-cart .summary .h3 {
   color: var(--greenDark);
 }
-.clean-block.clean-cart .summary h4:last-of-type, .clean-block.clean-cart .summary .h4:last-of-type {
+.clean-block.clean-cart .summary h4:last-of-type,
+.clean-block.clean-cart .summary .h4:last-of-type {
   color: var(--greenDark);
 }
 
 .clean-block.clean-cart .summary h4:first-of-type,
 .clean-block.clean-cart .summary .h4:first-of-type {
-  border-top: 1px solid  var(--greenLigth);
+  border-top: 1px solid var(--greenLigth);
 }
 
 .clean-related-item .related-name h4,
 .clean-related-item .related-name .h4 {
-  color:  var(--greenDark);
+  color: var(--greenDark);
 }
 
-
 .clean-block.clean-post .post-body .post-info span {
-  color:  var(--greenDark);
+  color: var(--greenDark);
 }
 
 .clean-block.clean-cart .summary .h4:last-of-type {
   /* color: #99cc99; */
- 
+
   border-bottom: 1px solid #e6edf5;
 }
 
 .page-footer ul li:before,
 .page-footer ul li:after {
-  background-color:  var(--greenDark) !important;
+  background-color: var(--greenDark) !important;
 }
 
-@media (min-width: 768px){
-  .page-footer ul li:before, .page-footer ul li:after{
-    background-color:  var(--greenDark) !important;
+@media (min-width: 768px) {
+  .page-footer ul li:before,
+  .page-footer ul li:after {
+    background-color: var(--greenDark) !important;
   }
 }
