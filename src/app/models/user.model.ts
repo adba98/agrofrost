@@ -1,4 +1,4 @@
-export class User {
+export class UserRegisterModel {
   public firstName: string;
   public lastName: string;
 

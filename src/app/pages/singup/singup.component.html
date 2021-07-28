@@ -9,7 +9,7 @@
         </p>
         <p>
           Si ya te encuentras registrado en la plataforma da click
-          <a class="text-info" [routerLink]="'/singup'"> aqui para ingresar</a>
+          <a class="text-info" [routerLink]="'/singin'"> aqui para ingresar</a>
         </p>
       </div>
 
@@ -27,7 +27,7 @@
             minlength="2"
             [(ngModel)]="user.firstName"
             name="firstName"
-            [class.is-in¨*y¨*yxvalid]="
+            [class.is-invalid]="
               regsiterForm.submitted &&
               regsiterForm.controls['firstName'].errors
             "
@@ -129,16 +129,26 @@
             >Debe Introducir una Contraseña con minimo 8 caracteres
           </span>
         </div>
-
+        
         <div class="mb-3">
           <div class="form-check">
             <input
-              class="form-check-input"
-              type="checkbox"
-              id="checkbox"
-            /><label class="form-check-label" for="checkbox"
-              >Acepto termnos y condiciones</label
+            class="form-check-input"
+            type="checkbox"
+            id="terms"
+            [(ngModel)]="acceptTerms"
+            name="terms"
+            required
+            /><label class="form-check-label" for="terms"
+            >Acepto termnos y condiciones</label
             >
+            <span
+              class="message-error"
+              *ngIf="
+                regsiterForm.submitted && regsiterForm.controls['terms'].errors
+              "
+              >Debe aceptar los terminos y condiciones 
+            </span>
           </div>
         </div>
 
