@@ -1,8 +1,11 @@
 import { Component, ErrorHandler, OnInit } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { NgForm } from '@angular/forms';
 
 import firebase from 'firebase/app';
+import { UserLoginModel } from '../../models/user.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-singin',
@@ -10,7 +13,11 @@ import firebase from 'firebase/app';
   styleUrls: ['./singin.component.scss'],
 })
 export class SinginComponent implements OnInit {
-  constructor(public auth: AngularFireAuth) {}
+  public user: UserLoginModel;
+  constructor(public auth: AngularFireAuth,
+    private auth2: AuthService) {
+    this.user = new UserLoginModel();
+  }
   ngOnInit(): void {
     //firebase.auth()
     //firebase.auth().languageCode = 'es';
@@ -48,6 +55,13 @@ export class SinginComponent implements OnInit {
   loginWithFacebook() {
     this.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
     console.log('se inicio con Facebook');
+  }
+
+  loginBasicEmailAndPassword(form: NgForm){
+    if(form.invalid)return;
+   // TODO: poner validadciones
+    this.auth2.loginUserWithEmail(this.user);
+
   }
 
   logout() {
