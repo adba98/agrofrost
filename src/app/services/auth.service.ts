@@ -29,7 +29,7 @@ export class AuthService {
       returtSecuredToken: true,
     };
 
-    this.http.post(`${this.url}:signUp?key=${this.apikey}`,body )
+   return this.http.post(`${this.url}:signUp?key=${this.apikey}`,body )
     .pipe(
       map((res:any) => {
         if(res.idToken){
@@ -37,18 +37,7 @@ export class AuthService {
         }
         return res;
       })
-    )
-    .subscribe(
-       (res) => {
-         //: SingUpOK 
-       console.log(res);
-    },
-      (err)=> { 
-         // SingUpError
-          console.log(err);
-          console.log(err.error.error.message)
-        })
-  
+    );
   }
   loginUserWithEmail(user: UserLoginModel) {
     const body = {
@@ -57,7 +46,7 @@ export class AuthService {
     };
 
     // podrria hacerlo con verify password
-    this.http
+    return this.http
       .post(`${this.url}:signInWithPassword?key=${this.apikey}`, body)
       .pipe(
         map((res:any) => {
@@ -66,19 +55,7 @@ export class AuthService {
           }
           return res;
         })
-      )
-      .subscribe(
-        (res) => {
-          //: SingUpOK
-          console.log(res);
-        },
-        (err) => {
-          // SingUpError
-          console.log(err);
-          console.log(err.error.error.message);
-        }
-      ); 
-    
+      );
   }
 
   private saveToken (idToken: string){
@@ -92,15 +69,9 @@ export class AuthService {
     }else{
       this.userToken = '';
     }
-    
     return this.userToken;
   }
-
 }
-
-
-
-
 
 export interface SingOK {
   kind:         string;

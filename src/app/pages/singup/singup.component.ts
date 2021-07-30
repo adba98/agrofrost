@@ -7,6 +7,7 @@ import {
   DepatamentosYmunicipiosService,
   MunicipioInfo,
 } from 'src/app/services/depatamentos-ymunicipios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-singup',
@@ -49,8 +50,31 @@ export class SingupComponent implements OnInit {
 
     if (!form.pristine && form.valid) {
       console.log('Formulario valiido');
-      this.auth.createUserWithEmail(this.user);
-      this.router.navigate(['/home']);
+
+      
+      Swal.fire({
+        icon:'info',       
+        text: 'Espere por favor',
+        allowOutsideClick:false,
+      })
+
+      Swal.showLoading();
+      this.auth.createUserWithEmail(this.user)
+      .subscribe(
+        (res) => {
+          //: SingUpOK
+          console.log(res);
+          Swal.close()
+          this.router.navigate(['/home']);
+        },
+        (err) => {
+          // SingUpError
+          Swal.fire({
+            icon:'error',       
+            text: err.error.error.message,
+          })
+        }
+      ); 
     }
   }
 }
