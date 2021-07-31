@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,17 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  public isLogin: boolean;
   paths = [
     {
       name: 'Inicio',
       path: '/home',
     },
     {
-      name: 'Se Vende',
+      name: 'Vende',
       path: '/posts',
     },
     {
-      name: 'Se Compra',
+      name: 'Compra',
       path: '/posts',
     },
     {
@@ -27,25 +30,28 @@ export class NavbarComponent implements OnInit {
       name: 'Caracteriticas ',
       path: '/feautures',
     },
-    {
-      name: 'Planes ',
-      path: '/pricing',
-    },
-  ];
-  auths = [
-    {
-      name: 'Iniciar Sesión',
-      path: '/singin',
-      type: 'primary',
-    },
-    {
-      name: 'Registrarse',
-      path: '/singup',
-      type: 'secondary',
-    },
+    // {
+    //   name: 'Planes ',
+    //   path: '/pricing',
+    // },
   ];
 
-  constructor() {}
+  constructor(private auth: AuthService, private router: Router) {
+    this.isLogin = this.auth.isLogginIn('');
+    this.auth.changinLoginStatus$.subscribe((status: boolean) => {
+      this.isLogin = status;
+    });
+  }
 
   ngOnInit(): void {}
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
+
+  
+  navbarOpen = false;
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 }

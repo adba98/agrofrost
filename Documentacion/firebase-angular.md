@@ -31,3 +31,9 @@ https://developers.google.com/identity/sign-in/web/sign-in (sigin in)
 # Autenticacion con firebase
 
 https://firebase.google.com/docs/auth/where-to-start?authuser=0
+
+# la uatenticacion con firebae la podemos hacer por medio del 
+   ## api
+   - rel https://firebase.google.com/docs/reference/rest/auth
+    por medio del endpoint https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API_KEY]
+

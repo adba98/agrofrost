@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 import { AboutComponent } from './pages/about/about.component';
 import { FeauturesComponent } from './pages/feautures/feautures.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -27,15 +28,15 @@ const routes: Routes = [
   {
     path: 'posts',
     loadChildren: () =>
-      import('./pages/posts/posts.module').then((m) => m.PostsModule),
+    import('./pages/posts/posts.module').then((m) => m.PostsModule),
   },
   {
-    // FIXME: Corregir seccion privada
     path: 'p',
     loadChildren: () =>
-      import('./private-pages/private-pages.module').then(
-        (m) => m.PrivatePagesModule
+    import('./private-pages/private-pages.module').then(
+      (m) => m.PrivatePagesModule
       ),
+      canActivate:[ AuthGuard]    // FIXME: Corregir usar canLoad
   },
   {
     path: 'singin',
