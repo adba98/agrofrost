@@ -21,7 +21,16 @@ export const environment = {
         '66417452803-goil61145cvfq64c2r69fhm4a52l3sb9.apps.googleusercontent.com',
     },
   },
+  datosAbiertosGovco : {
+    clientID : '26r4brc5txfzavbq6pb84e8d8',
+    apiKey : '24jqq5wjj90iqwaayd2u0dbygbv5r9db0xq4s98oqla1yqp1tf',
+    appTtoken : '5lXvVAUcBJ5ovX7n4ZsGqBreY'
+  }
+
 };
+
+// https://www.datos.gov.co/es/profile/edit/developer_settings => para obtner creendiclaes
+//https://dev.socrata.com/foundry/www.datos.gov.co/2pnw-mmge 
 
 /*
  * For easier debugging in development mode, you can import the following file
