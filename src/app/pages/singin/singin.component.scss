@@ -1,0 +1,9 @@
+.federado {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &_btn {
+    background-color: red;
+  }
+}

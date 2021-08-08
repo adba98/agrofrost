@@ -1,55 +1,57 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-
+  public isLogin: boolean;
   paths = [
     {
       name: 'Inicio',
-      path: '/home'
+      path: '/home',
     },
     {
-      name: 'Se Vende',
-      path: '/posts'
+      name: 'Vende',
+      path: '/posts',
     },
     {
-      name: 'Se Compra',
-      path: '/posts'
+      name: 'Compra',
+      path: '/posts',
     },
     {
       name: 'Nosotros',
-      path: '/about'
+      path: '/about',
     },
     {
       name: 'Caracteriticas ',
-      path: '/feautures'
+      path: '/feautures',
     },
-    {
-      name: 'Planes ',
-      path: '/pricing'
-    }
+    // {
+    //   name: 'Planes ',
+    //   path: '/pricing',
+    // },
   ];
-  auths= [
-    {
-      name: 'Iniciar Sesión',
-      path: '/singin',
-      type: 'primary'
-    },
-    {
-      name: 'Registrarse',
-      path: '/singup',
-      type: 'secondary'
-    },
-  ]
 
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private auth: AuthService, private router: Router) {
+    this.isLogin = this.auth.isLogginIn('');
+    this.auth.changinLoginStatus$.subscribe((status: boolean) => {
+      this.isLogin = status;
+    });
   }
 
+  ngOnInit(): void {}
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
+
+  
+  navbarOpen = false;
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 }

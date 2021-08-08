@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 import { AboutComponent } from './pages/about/about.component';
 import { FeauturesComponent } from './pages/feautures/feautures.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -27,13 +28,15 @@ const routes: Routes = [
   {
     path: 'posts',
     loadChildren: () =>
-      import('./pages/posts/posts.module').then((m) => m.PostsModule)
+    import('./pages/posts/posts.module').then((m) => m.PostsModule),
   },
   {
-// FIXME: Corregir seccion privada
-    path: 'p', 
+    path: 'p',
     loadChildren: () =>
-      import('./private-pages/private-pages.module').then((m) => m.PrivatePagesModule)
+    import('./private-pages/private-pages.module').then(
+      (m) => m.PrivatePagesModule
+      ),
+      canActivate:[ AuthGuard]    // FIXME: Corregir usar canLoad
   },
   {
     path: 'singin',
@@ -42,7 +45,7 @@ const routes: Routes = [
   {
     path: 'singup',
     component: SingupComponent,
-  }, 
+  },
   {
     path: '**',
     redirectTo: 'home',
@@ -50,7 +53,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})], // use hash to manage url on firebase
+  imports: [RouterModule.forRoot(routes, { useHash: true })], // use hash to manage url on firebase
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
