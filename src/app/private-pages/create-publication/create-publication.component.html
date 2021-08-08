@@ -1,0 +1,210 @@
+<main class="page login-page mt-4 pt-4">
+  <section class="clean-block clean-form dark">
+    <div class="container">
+      <div class="block-heading">
+        <h2 class="text-info">Publicación</h2>
+        <p>
+          Para mejoerar tu visbilidad te recomendamos ver nuestros
+          <a class="text-info" [routerLink]="'/pricing'"> Planes</a>
+        </p>
+      </div>
+      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="savePost()">
+        <div class="mb-3">
+          <p class="form-label">Tipo de publicación</p>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">Compra</label>
+            <input
+              class="form-check-input"
+              type="radio"
+              value="Compra"
+              formControlName="tipo_post"
+            />
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">Vende</label>
+            <input
+              class="form-check-input"
+              type="radio"
+              value="Vende"
+              formControlName="tipo_post"
+            />
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">Contrato para cultivar</label>
+              <input
+                class="form-check-input"
+                type="radio"
+                value="Contrato para cultivar"
+                formControlName="tipo_post"
+              />
+            </div>
+          </div>
+          <div *ngIf="campoEsInvalido('tipo_post')" class="alert alert-danger">
+            Debe ingresar un valor valido
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="product">Producto</label
+          ><input
+            class="form-control item"
+            type="text"
+            formControlName="cultivo"
+            (input)="teclaPresionada()" [class.is-invalid]="campoEsInvalido('cultivo')"
+            />
+            <div *ngIf="campoEsInvalido('cultivo')" class="alert alert-danger">
+              Debe ingresar un valor valido
+            </div>
+          <button
+            *ngIf="cultivoSeleccionado"
+            class="btn btn-primary mt-3 w-100"
+            (click)="cambiarTermino()"
+          >
+            Cambiar
+          </button>
+          <div *ngIf="cultivoSeleccionado === null">
+            <button
+              class="btn btn-primary mt-3 w-100"
+              (click)="buscarPorTermino()"
+            >
+              Buscar
+            </button>
+            <table
+              class="table table-hover"
+              *ngIf="cultivos.length > 0; else noResultados"
+            >
+              <thead>
+                <tr>
+                  <th><abbr title="Producto">Producto</abbr></th>
+                  <th>
+                    <abbr title="Grupo de cultivo">Grupo de cultivo</abbr>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr
+                  *ngFor="let cultivo of cultivos"
+                  (click)="selectProducto(cultivo)"
+                >
+                  <td>
+                    {{ cultivo.desagregaci_n_regional_y | titlecase }}
+                  </td>
+                  <td>
+                    {{ cultivo.grupo_de_cultivo | titlecase }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #noResultados>
+            <div *ngIf="hayError" class="alert alert-danger mt-3">
+              No hay resultados para : {{ termino }}
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="product">Descripción</label>
+          <textarea
+            class="form-control item"
+            type="text"
+            spellcheck="true"
+            formControlName="descripcion"
+            [class.is-invalid]="campoEsInvalido('descripcion')"
+          ></textarea>
+  
+          <div *ngIf="campoEsInvalido('cantidad')" class="alert alert-danger">
+            Debe ingresar un valor valido
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="cantidad">Cantidad (kilogramos)</label>
+
+          <input
+            class="form-control item"
+            type="text"
+            formControlName="cantidad"
+            (keypress)="onKeyPressOnlyNumbers($event)"
+            [class.is-invalid]="campoEsInvalido('cantidad')"
+          />
+          <div *ngIf="campoEsInvalido('cantidad')" class="alert alert-danger">
+            Debe ingresar un valor valido
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="precio"> Precio (x kilogramos)</label>
+
+          <input
+            class="form-control item"
+            type="text"
+            formControlName="precio"
+            (keypress)="onKeyPressOnlyNumbers($event)"
+            [class.is-invalid]="campoEsInvalido('precio')"
+          />
+          <div *ngIf="campoEsInvalido('precio')" class="alert alert-danger">
+            Debe ingresar un valor valido
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <p class="form-label">
+            ¿Rquiere servicio para transportar los productos?
+          </p>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">Si</label>
+            <input
+              class="form-check-input"
+              type="radio"
+              value="Si"
+              formControlName="transporte"
+            />
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">No</label>
+            <input
+              class="form-check-input"
+              type="radio"
+              value="No"
+              formControlName="transporte"
+            />
+          </div>
+          <div *ngIf="campoEsInvalido('transporte')" class="alert alert-danger">
+            Debe ingresar un valor valido
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <p class="form-label"
+          [class.text-danger]="campoEsInvalido('organico')"
+          >¿Porducto organico?</p>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">Si</label>
+            <input
+              class="form-check-input"
+              type="radio"
+              value="Si"
+              formControlName="organico"
+            />
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">No</label>
+            <input
+            class="form-check-input"
+            type="radio"
+            value="No"
+            formControlName="organico"
+            />
+          </div>
+          <div *ngIf="campoEsInvalido('organico')" class="alert alert-danger">
+            Debe ingresar un valor valido
+          </div>
+        </div>
+        <button class="btn btn-primary mt-3 w-100" type="submit">
+          Publicar
+        </button>
+      </form>
+
+      {{ forma.value | json }}
+    </div>
+  </section>
+</main>
