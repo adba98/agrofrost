@@ -64,22 +64,13 @@
         </ng-container>
         
         <ng-template #logoutOption> 
-          <button class="btn-outline-primary primary nav-link active btn text-white"
-        (click) = "logout()"
-        >
+          <a 
+            class="btn-outline-primary primary nav-link active btn text-white"
+           (click) = "logout()"
+          >
             Cerrar sesióm
-          </button>
-        </ng-template>
-        
-        <!-- <form class="d-flex">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
+          </a>
+        </ng-template>   
       </ul>
     </div>
   </div>

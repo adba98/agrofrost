@@ -3,8 +3,6 @@ $link-color: #99cc99 !default;
 $color-verde-oscuro: #339966;
 $color-verde-claro: #99cc99;
 
-$theme-colors: (
-  "primary": $color-verde-oscuro,
-  "secondary": $color-verde-claro,
-  "danger": #ff4136,
-);
+$primary: $color-verde-oscuro;
+$secondary: $color-verde-claro;
+$info: $color-verde-oscuro;
