@@ -14,6 +14,8 @@ import { UserRegisterModel, UserLoginModel } from '../models/user.model';
 export class AuthService {
   // documentacion https://firebase.google.com/docs/reference/rest/auth
   private url = 'https://identitytoolkit.googleapis.com/v1/accounts';
+
+  private timeToLogout = environment.authTimeValidityToken;
   private apikey = environment.firebaseConfig.apiKey;
 
   private userToken!: string;
@@ -78,7 +80,7 @@ export class AuthService {
     localStorage.setItem(this.LS_TOKENKEY, idToken);
     this.changinLoginStatusSubject.next(true);
     
-    const exp: number = new Date().setSeconds(60 * 5);
+    const exp: number = new Date().setSeconds(this.timeToLogout);
     localStorage.setItem(this.LS_EXPIRATIONTIME, exp.toString());
   }
   private readToken():string {

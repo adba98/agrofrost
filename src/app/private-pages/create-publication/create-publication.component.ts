@@ -21,6 +21,10 @@ export class CreatePublicationComponent implements OnInit {
   public termino: string = '';
   public hayError = false;
 
+  lat = 51.678418;
+  lng = 7.809007;
+  zoom = 1; 
+
   public cultivoSeleccionado: Cultivo | null = null;
 
   deBouncer: Subject<string> = new Subject();
@@ -80,6 +84,7 @@ export class CreatePublicationComponent implements OnInit {
     this.cultivoSeleccionado = null;
     this.forma.patchValue({ cultivo: null });
     this.forma.get('cultivo')?.enable();
+    this.cultivos = [];
   }
   
   onKeyPressOnlyNumbers(event: any) {
