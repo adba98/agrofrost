@@ -47,6 +47,8 @@ export class CreatePublicationComponent implements OnInit {
   municipios: string[] = [];
   imageError!: string;
 
+  imagenesBase64 : string[];
+
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
@@ -58,8 +60,10 @@ export class CreatePublicationComponent implements OnInit {
 
     this.createForm();
     this.market = new Market();
+    this.imagenesBase64 =[];
 
   }
+
 
   ngOnInit(): void {
     this.deBouncer.pipe(debounceTime(3000)).subscribe((term) => {
@@ -110,6 +114,7 @@ export class CreatePublicationComponent implements OnInit {
       organico: ['', [Validators.required], ''],
       municipio: ['', [Validators.required,], ''],
       direccion: ['', [Validators.required,], ''],
+      celular: ['', [Validators.required,], ''],
       imagenes: this.fb.array([['',Validators.required]]),
     });
 
@@ -207,22 +212,21 @@ export class CreatePublicationComponent implements OnInit {
       const allowed_types = ['image/png', 'image/jpeg'];
       const max_height = 15200;
       const max_width = 25600;
-
-      if (fileInput.target.files[0].size > max_size) {
-        this.imageError = 'Excede el tamaño del archivo' + max_size / 1000 + 'Mb';
-        return;
-      }
-
+      
       if (!(includes(allowed_types, fileInput.target.files[0].type))) {
         console.log(fileInput.target.files[0].type);
         
         this.imageError = 'El tipo de formato no es soportado, solo se pueden subir arhivos en formato ( JPG | PNG )';
         return;
       }
+      if (fileInput.target.files[0].size > max_size) {
+        this.imageError = 'Excede el tamaño del archivo' + max_size / 1000 + 'Mb';
+        return;
+      }
 
 
       const reader = new FileReader();
-      reader.onload = (e: any) => {
+      reader.onload = (e:any) => {
         console.log(e);
         
         const image = new Image();
@@ -240,9 +244,11 @@ export class CreatePublicationComponent implements OnInit {
           } else {
             const imgBase64Path = e.target.result;
 
-            this.cardImageBase64 = imgBase64Path;
+            // this.cardImageBase64 = imgBase64Path;
             this.isImageSaved = true;
          //  this.previewImagePath = imgBase64Path;
+
+         this.imagenesBase64.push(imgBase64Path);
           }
         };
       };
@@ -250,6 +256,9 @@ export class CreatePublicationComponent implements OnInit {
       reader.readAsDataURL(fileInput.target.files[0]);
     }
 
+  }
+  eliminarImagen(value:string){
+  this.imagenesBase64=  this.imagenesBase64.filter(item => item !== value)
   }
 
 
@@ -290,4 +299,13 @@ export class CreatePublicationComponent implements OnInit {
 
     });
   }
+
+  //TODO: 1 Crear metodo submit , verificar como se construye el form.value, o si se necsita scar del json
+
+  // FIXME: Anexar latitud y longitud
+
+  // TODO: 2 realizar push enviadno un json
+
+  //FIXME: 
+
 }
