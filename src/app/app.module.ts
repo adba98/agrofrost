@@ -47,7 +47,12 @@ import { environment } from '../environments/environment';
     AngularFireAnalyticsModule,
     AngularFireAuthModule,
 
-    AgmCoreModule.forRoot(environment.gcpApi.api),
+    AgmCoreModule.forRoot(
+      {
+      apiKey: environment.gcpApi.api.apiKey, 
+      libraries: ['places']
+     }
+    ),
 
     AppRoutingModule,
     PagesModule,
@@ -57,6 +62,9 @@ import { environment } from '../environments/environment';
     UserTrackingService,
     ScreenTrackingService,
     { provide: LANGUAGE_CODE, useValue: 'fr' },
+  ],
+  exports:[
+    AgmCoreModule
   ],
   bootstrap: [AppComponent] 
 })

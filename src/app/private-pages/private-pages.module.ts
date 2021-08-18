@@ -19,9 +19,10 @@ import { environment } from 'src/environments/environment';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    
     PrivatePagesRoutingModule,
 
-    AgmCoreModule.forRoot(environment.gcpApi.api),
+    AgmCoreModule
     
   ]
 })
