@@ -115,8 +115,8 @@ export class CreatePublicationComponent implements OnInit {
       municipio: ['', [Validators.required,], ''],
       direccion: ['', [Validators.required,], ''],
       celular: ['', [Validators.required,], ''],
-      imagenes: this.fb.array([['',Validators.required]]),
     });
+    // imagenes: this.fb.array([['',Validators.required],['sdds',Validators.required]]),
 
   }
   get imagenes (): FormArray{
@@ -182,8 +182,10 @@ export class CreatePublicationComponent implements OnInit {
     });
   }
 
-  campoEsInvalido(control: string) {
-    return this.forma.get(control)?.invalid && this.forma.get(control)?.touched;
+  campoEsInvalido(control: string) { 
+    console.log(this.forma.get(control));
+    
+    return this.forma.get(control)?.invalid && this.forma.get(control)?.touched ;
   }
 
   colocarCoordenada(evento: any) {
@@ -195,12 +197,24 @@ export class CreatePublicationComponent implements OnInit {
   }
 
   savePost() {
-    this.forma.markAllAsTouched();
+   this.forma.markAllAsTouched();
     if (this.forma.invalid) {
       return;
     }
 
-    this.sFDB.createPost(this.forma.value).subscribe((res) => {
+
+
+    let body = {data:this.forma.value, imgs:[{}]};
+    console.log(typeof(body));
+    
+    body.imgs = this.imagenesBase64;
+    // body["imgs"] = this.imagenesBase64;
+    console.log(body);
+    
+    
+    
+
+    this.sFDB.createPost(body).subscribe((res) => {
       console.info(res);
     });
   }
@@ -233,6 +247,8 @@ export class CreatePublicationComponent implements OnInit {
         // e.target trae la imagen en formato base 64
         image.src = e.target.result;
         image.onload = (rs: any) => {
+
+          //FIXME;  corregir tamanio        
           const img_height = rs.currentTarget['height'];
           const img_width = rs.currentTarget['width'];
 
@@ -242,13 +258,8 @@ export class CreatePublicationComponent implements OnInit {
           `La dimension maxiam soportada ${max_height} - ${max_width}  'px`;
             return;
           } else {
-            const imgBase64Path = e.target.result;
-
-            // this.cardImageBase64 = imgBase64Path;
             this.isImageSaved = true;
-         //  this.previewImagePath = imgBase64Path;
-
-         this.imagenesBase64.push(imgBase64Path);
+            this.imagenesBase64.push(image.src);
           }
         };
       };
@@ -300,8 +311,7 @@ export class CreatePublicationComponent implements OnInit {
     });
   }
 
-  //TODO: 1 Crear metodo submit , verificar como se construye el form.value, o si se necsita scar del json
-
+ 
   // FIXME: Anexar latitud y longitud
 
   // TODO: 2 realizar push enviadno un json

@@ -8,7 +8,7 @@
           <a class="text-info" [routerLink]="'/pricing'"> Planes</a>
         </p>
       </div>
-      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="savePost()">
+      <form autocomplete="off" [formGroup]="forma" >
         <fieldset>
           <div class="mb-3">
             <p class="form-label">Tipo de publicación</p>
@@ -64,6 +64,7 @@
             </button>
             <div *ngIf="cultivoSeleccionado === null">
               <button
+              type="button"
                 class="btn btn-primary mt-3 w-100"
                 (click)="buscarPorTermino()"
               >
@@ -113,7 +114,7 @@
               [class.is-invalid]="campoEsInvalido('descripcion')"
             ></textarea>
 
-            <div *ngIf="campoEsInvalido('cantidad')" class="message-error">
+            <div *ngIf="campoEsInvalido('descripcion')" class="message-error">
               Debe ingresar un valor valido
             </div>
           </div>
@@ -358,13 +359,13 @@
             Debe ingresar un numero de contacto
           </div>
         </div>
-        <button class="btn btn-primary mt-3 w-100" type="submit">
+        <button class="btn btn-primary mt-3 w-100" type="submit" (click)="savePost()">
           Publicar
         </button>
       </form>
     </div>
     {{ forma.value | json }}
     <hr />
-    {{ imagenes.value | json }}
+    <!-- {{ imagenes.value | json }} -->
   </section>
 </main>
