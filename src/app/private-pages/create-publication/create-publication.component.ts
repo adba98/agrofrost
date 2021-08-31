@@ -11,11 +11,12 @@ import { includes}  from 'lodash';
 
 
 
-import { Cultivo } from 'src/app/components/models/RestAgricultureResponse.interace';
+import { Cultivo } from 'src/app/models/RestAgricultureResponse.interace';
 import { AgricultureService } from '../../services/agriculture.service';
 import { FirebaseRealtimeDBService } from '../../services/firebase-realtime-db.service';
 import { Market } from './maket.class';
 import { DepatamentosYmunicipiosService, MunicipioInfo } from '../../services/depatamentos-ymunicipios.service';
+import { Post } from 'src/app/models/post.interface';
 
 @Component({
   selector: 'app-create-publication',
@@ -202,17 +203,10 @@ export class CreatePublicationComponent implements OnInit {
       return;
     }
 
-
-
-    let body = {data:this.forma.value, imgs:[{}]};
-    console.log(typeof(body));
-    
+    let body:Post = this.forma.value;
+    body.cultivo = this.forma.get('cultivo')?.value;
     body.imgs = this.imagenesBase64;
-    // body["imgs"] = this.imagenesBase64;
-    console.log(body);
-    
-    
-    
+  
 
     this.sFDB.createPost(body).subscribe((res) => {
       console.info(res);
@@ -314,8 +308,5 @@ export class CreatePublicationComponent implements OnInit {
  
   // FIXME: Anexar latitud y longitud
 
-  // TODO: 2 realizar push enviadno un json
-
-  //FIXME: 
 
 }
