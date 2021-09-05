@@ -198,29 +198,35 @@
               <div class="row g-0">
                 <div
                   class="col-12 col-md-6 col-lg-4"
-                  *ngFor="let item of items; let i = index"
+                  *ngFor="let post of posts; let i = index"
                 >
-                  <div class="clean-product-item">
-                    <div class="image">
-                      <a href="#"
-                        ><img
-                          class="img-fluid d-block mx-auto"
-                          src="assets/img/products/enthusiast-nim-01PIjgaUSr8-unsplash.jpg"
-                      /></a>
-                    </div>
-                    <div class="product-name">
-                      <a href="#">Lorem ipsum dolor sit amet</a>
-                    </div>
-                    <div class="about">
-                      <div class="rating">
-                        <img src="assets/img/star.svg" /><img
-                          src="assets/img/star.svg"
-                        /><img src="assets/img/star.svg" /><img
-                          src="assets/img/star-half-empty.svg"
-                        /><img src="assets/img/star-empty.svg" />
+                  <div class="card product">
+                    <img
+                      class="img-fluid d-block mx-auto card-img-top"
+                      [src]="post.imgs[0]"
+                    />
+
+                    <div class="card-body info">
+                      <div class="card-title">
+                        <h3>
+                          {{ post.cultivo.cultivo }}
+                        </h3>
+                        <span class="small">
+                          {{ post.cultivo.grupo_de_cultivo }}
+                        </span>
                       </div>
-                      <div class="price">
-                        <h3>$100.000</h3>
+
+                      <div class="precio">
+                        {{
+                          post.precio | currency: "COP":"symbol-narrow":"3.0-0"
+                        }}
+                        x Kg
+                      </div>
+                      <div class="cantidad">
+                        Cantidad Disponible: {{ post.cantidad }} kg
+                      </div>
+                      <div class="municipio">
+                        {{ post.ubicacion.municipio }}
                       </div>
                     </div>
                   </div>

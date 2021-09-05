@@ -18,6 +18,8 @@ import {
   LANGUAGE_CODE,
 } from '@angular/fire/auth';
 
+import { AgmCoreModule } from "@agm/core";
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,19 +41,31 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
-    PagesModule,
-    PrivatePagesModule,
+    HttpClientModule,
+
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
     AngularFireAuthModule,
-    HttpClientModule,
+
+    AgmCoreModule.forRoot(
+      {
+      apiKey: environment.gcpApi.api.apiKey, 
+      libraries: ['places']
+     }
+    ),
+
+    AppRoutingModule,
+    PagesModule,
+    PrivatePagesModule,
   ],
   providers: [
     UserTrackingService,
     ScreenTrackingService,
     { provide: LANGUAGE_CODE, useValue: 'fr' },
   ],
-  bootstrap: [AppComponent]
+  exports:[
+    AgmCoreModule
+  ],
+  bootstrap: [AppComponent] 
 })
 export class AppModule {}

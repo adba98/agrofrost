@@ -1,21 +1,22 @@
 <main class="page landing-page">
   <section
-    class="clean-block clean-hero banner"
-    style="
+  class="clean-block clean-hero banner"
+  style="
       background-image: url('./assets/img/banner/elaine-casap-qgHGDbbSNm8-unsplash.jpg');
-    "
+      "
   >
-    <div class="text">
-      <h2>Conectando el agro con el mundo</h2>
-      <p>Descubre los productos agricolas de Cundinamarca</p>
-      <a 
-        class="btn btn-outline-light btn-lg"
-        [routerLink]="['/posts']"  
-      >
-        Compra o Vende
-      </a>
-    </div>
-  </section>
+  <div class="text">
+    <h2>Conectando el agro con el mundo</h2>
+    <p>Descubre los productos agricolas de Cundinamarca</p>
+    <a 
+    class="btn btn-outline-light btn-lg"
+    [routerLink]="['/posts']"  
+    >
+    Compra o Vende
+  </a>
+</div>
+</section>
+<a [routerLink]="['/c']" routerLinkActive="router-link-active" >Componente Prueba</a>
 
 
   <app-deals></app-deals>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseRealtimeDBService } from '../../services/firebase-realtime-db.service';
+import { Post } from '../../models/post.interface';
 
 @Component({
   selector: 'app-posts',
@@ -6,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
-  items = [...Array(13).keys()];
+  public posts!: Post[];
 
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor(
+    private db: FirebaseRealtimeDBService
+  ) {
+    this.db.getAllPost().subscribe((res) => this.posts = res);
+  }
+
+  ngOnInit(): void { }
 }

@@ -9,6 +9,7 @@ import { PricingComponent } from './pricing/pricing.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CultivoPipe } from '../pipes/Cultivo.pipe';
 
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { ServicesPageComponent } from './services-page/services-page.component';

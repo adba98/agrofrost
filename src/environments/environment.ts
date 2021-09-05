@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  authTimeValidityToken : 60*10,
   firebaseConfig: {
     apiKey: 'AIzaSyDsnO2rl8WVWoMhbAt5lTvaCh6Boq58OTk',
     authDomain: 'agrofrost-a5c31.firebaseapp.com',
@@ -15,7 +16,9 @@ export const environment = {
     appId: '1:237140780954:web:e4a7a86854b68f6efffc23',
     measurementId: 'G-06RF9JV7VW',
   },
+  //usercall.hm@
   gcpApi: {
+    api:{    apiKey: 'AIzaSyCjxHl0XEHDGD5Tj4BGKPfErWJljborfpQ'},
     web: {
       client_id:
         '66417452803-goil61145cvfq64c2r69fhm4a52l3sb9.apps.googleusercontent.com',
@@ -26,7 +29,7 @@ export const environment = {
     apiKey : '24jqq5wjj90iqwaayd2u0dbygbv5r9db0xq4s98oqla1yqp1tf',
     appTtoken : '5lXvVAUcBJ5ovX7n4ZsGqBreY'
   }
-
+ 
 };
 
 // https://www.datos.gov.co/es/profile/edit/developer_settings => para obtner creendiclaes

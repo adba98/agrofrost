@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import {
   Cultivo,
   RestAgriculturesResponse,
-} from '../components/models/RestAgricultureResponse.interace';
+} from '../models/RestAgricultureResponse.interace';
 import { Observable, pipe } from 'rxjs';
 
 @Injectable({
