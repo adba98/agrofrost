@@ -10,6 +10,11 @@ import { PricingComponent } from './pricing/pricing.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { TestimonialsComponent } from './testimonials/testimonials.component';
+import { ServicesPageComponent } from './services-page/services-page.component';
+import { ContactUsComponent } from './contacus/contact-us.component';
+import { SharedModule } from '../components/shared/shared.module';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -18,8 +23,12 @@ import { FormsModule } from '@angular/forms';
     SingupComponent,
     SinginComponent,
     PricingComponent,
+    ContactUsComponent,
+    TestimonialsComponent,
+    ServicesPageComponent,
   ],
-  imports: [CommonModule, [RouterModule], FormsModule],
+  imports: [CommonModule, [RouterModule], FormsModule,
+    SharedModule],
   exports: [
     HomeComponent,
     AboutComponent,
@@ -29,4 +38,4 @@ import { FormsModule } from '@angular/forms';
     PricingComponent,
   ],
 })
-export class PagesModule {}
+export class PagesModule { }

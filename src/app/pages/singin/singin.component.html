@@ -1,4 +1,4 @@
-<main class="page login-page mt-4 pt-4">
+<main class="page login-page">
   <section class="clean-block clean-form dark">
     <div *ngIf="auth.user | async as user; else showLogin">
       <h1>Hello {{ user.displayName }}!</h1>
