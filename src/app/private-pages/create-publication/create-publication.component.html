@@ -8,7 +8,7 @@
           <a class="text-info" [routerLink]="'/pricing'"> Planes</a>
         </p>
       </div>
-      <form autocomplete="off" [formGroup]="forma" >
+      <form autocomplete="off" [formGroup]="forma">
         <fieldset>
           <div class="mb-3">
             <p class="form-label">Tipo de publicación</p>
@@ -50,6 +50,7 @@
               type="text"
               formControlName="cultivo"
               (input)="teclaPresionada()"
+              [value]="forma.get('cultivo')?.value | cultivoPipe "
               [class.is-invalid]="campoEsInvalido('cultivo')"
             />
             <div *ngIf="campoEsInvalido('cultivo')" class="message-error">
@@ -64,7 +65,7 @@
             </button>
             <div *ngIf="cultivoSeleccionado === null">
               <button
-              type="button"
+                type="button"
                 class="btn btn-primary mt-3 w-100"
                 (click)="buscarPorTermino()"
               >
@@ -120,7 +121,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="cantidad"
-              >Cantidad (kilogramos)</label
+              >Cantidad (Disponible / Requerida) (kilogramos)</label
             >
 
             <input
@@ -140,7 +141,7 @@
             >
             <input
               class="form-control item"
-              type="number"
+              type="text"
               formControlName="precio"
               (keypress)="onKeyPressOnlyNumbers($event)"
               [class.is-invalid]="campoEsInvalido('precio')"
@@ -220,8 +221,9 @@
               <div *ngFor="let file of imagenesBase64" class="my-5">
                 <img [src]="file" alt="" class="img-thumbnail" />
                 <button
-                class="deleteImagen btn btn-danger"
-                (click)="eliminarImagen(file)">
+                  class="deleteImagen btn btn-danger"
+                  (click)="eliminarImagen(file)"
+                >
                   Eliminar
                 </button>
               </div>
@@ -251,8 +253,8 @@
                 Click para subir imagen
                 <p>Te quedan {{ 5 - imagenesBase64.length }}</p>
                 <small *ngIf="imagenesBase64.length > 1"
-                  >Si no quieres añadir más imagenes puedes pasar <br>la siguiente
-                  sección</small
+                  >Si no quieres añadir más imagenes puedes pasar <br />la
+                  siguiente sección</small
                 >
               </div>
             </div>
@@ -262,8 +264,7 @@
           </div>
         </div>
 
-
-        <hr class="my-5">
+        <hr class="my-5" />
         <!-- <button
           type="button"
           class="btn btn-danger"
@@ -303,7 +304,6 @@
               class="form-control item"
               type="text"
               formControlName="direccion"
-              (keypress)="onKeyPressOnlyNumbers($event)"
               [class.is-invalid]="campoEsInvalido('direccion')"
             />
             <div *ngIf="campoEsInvalido('direccion')" class="message-error">
@@ -343,14 +343,14 @@
           </div>
         </fieldset>
         <div class="mb-3 mt-3">
-          <label class="form-label" for="celular">
-            Numero Celular</label
+          <label class="form-label" for="celular"> Numero Celular</label>
+          <br />
+          <small class="small"
+            >(Sera visble unicamente para usuarios Regitrados)</small
           >
-          <br>
-          <small class="small">(Sera visble unicamente para usuarios Regitrados)</small>
           <input
             class="form-control item"
-            type="number"
+            type="text"
             formControlName="celular"
             (keypress)="onKeyPressOnlyNumbers($event)"
             [class.is-invalid]="campoEsInvalido('celular')"
@@ -359,7 +359,11 @@
             Debe ingresar un numero de contacto
           </div>
         </div>
-        <button class="btn btn-primary mt-3 w-100" type="submit" (click)="savePost()">
+        <button
+          class="btn btn-primary mt-3 w-100"
+          type="submit"
+          (click)="savePost()"
+        >
           Publicar
         </button>
       </form>

@@ -7,7 +7,7 @@ import { debounceTime } from 'rxjs/operators';
 
 import { Geocoder, MapsAPILoader, MouseEvent } from '@agm/core';
 // import { google } from '@agm/core/services/google-maps-types';
-import { includes}  from 'lodash';
+import { includes, values } from 'lodash';
 
 
 
@@ -17,6 +17,7 @@ import { FirebaseRealtimeDBService } from '../../services/firebase-realtime-db.s
 import { Market } from './maket.class';
 import { DepatamentosYmunicipiosService, MunicipioInfo } from '../../services/depatamentos-ymunicipios.service';
 import { Post } from 'src/app/models/post.interface';
+import { Ubicacion, GeoCode, UserInfo } from '../../models/post.interface';
 
 @Component({
   selector: 'app-create-publication',
@@ -48,7 +49,7 @@ export class CreatePublicationComponent implements OnInit {
   municipios: string[] = [];
   imageError!: string;
 
-  imagenesBase64 : string[];
+  imagenesBase64: string[];
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -56,12 +57,12 @@ export class CreatePublicationComponent implements OnInit {
     private fb: FormBuilder,
     private sAgriculture: AgricultureService,
     private sFDB: FirebaseRealtimeDBService,
-    private sDM: DepatamentosYmunicipiosService
+    private sDM: DepatamentosYmunicipiosService,
   ) {
 
     this.createForm();
     this.market = new Market();
-    this.imagenesBase64 =[];
+    this.imagenesBase64 = [];
 
   }
 
@@ -107,7 +108,7 @@ export class CreatePublicationComponent implements OnInit {
   createForm() {
     this.forma = this.fb.group({
       tipo_post: ['', [Validators.required], ''],
-      cultivo: ['', [Validators.required], ''],
+      cultivo: ['', [Validators.required], Validators.minLength(5), ''],
       descripcion: ['', [Validators.required, Validators.minLength(10)], ''],
       cantidad: ['', [Validators.required, Validators.minLength(1), Validators.min(1)], ''],
       precio: ['', [Validators.required, Validators.minLength(3), Validators.min(100)], ''],
@@ -120,13 +121,13 @@ export class CreatePublicationComponent implements OnInit {
     // imagenes: this.fb.array([['',Validators.required],['sdds',Validators.required]]),
 
   }
-  get imagenes (): FormArray{
+  get imagenes(): FormArray {
     return this.forma.get('imagenes') as FormArray;
   }
 
-  insertarNuevaImagen(){
+  insertarNuevaImagen() {
     this.imagenes.push(
-      this.fb.control ('', Validators.required)
+      this.fb.control('', Validators.required)
     );
     /** upload with mutiple values
     this.imagenes.push(
@@ -179,14 +180,13 @@ export class CreatePublicationComponent implements OnInit {
     this.cultivoSeleccionado = cultivo;
     this.forma.get('cultivo')?.disable();
     this.forma.patchValue({
-      cultivo: `${cultivo.desagregaci_n_regional_y} - ${cultivo.grupo_de_cultivo}`,
+      cultivo: this.cultivoSeleccionado,
+      //  cultivo: `${cultivo.desagregaci_n_regional_y} - ${cultivo.grupo_de_cultivo}`,
     });
   }
 
-  campoEsInvalido(control: string) { 
-    console.log(this.forma.get(control));
-    
-    return this.forma.get(control)?.invalid && this.forma.get(control)?.touched ;
+  campoEsInvalido(control: string) {
+    return this.forma.get(control)?.invalid && this.forma.get(control)?.touched;
   }
 
   colocarCoordenada(evento: any) {
@@ -198,32 +198,60 @@ export class CreatePublicationComponent implements OnInit {
   }
 
   savePost() {
-   this.forma.markAllAsTouched();
+    this.forma.markAllAsTouched();
     if (this.forma.invalid) {
       return;
     }
+    if (this.cultivoSeleccionado == null) {
+      return
+    }
 
-    let body:Post = this.forma.value;
-    body.cultivo = this.forma.get('cultivo')?.value;
-    body.imgs = this.imagenesBase64;
-  
+
+
+   let data_geolocalizacion : GeoCode= {
+     lat: this.market.lat,
+     lng: this.market.long,
+   };
+    let data_ubicacion: Ubicacion= {
+      departamento: 'Cundinamarca',
+      municipio: this.forma.get('municipio')!.value,
+      direccion: this.forma.get('direccion')!.value,
+      geolocalizacion : data_geolocalizacion,
+    };
+
+    let data_user: UserInfo= {
+        celular: this.forma.get('celular')!.value,
+        correo : sessionStorage.getItem('emailUser')|| localStorage.getItem('token') || 'error',
+        nombre : 'Usuario Pruebas'
+    }
+
+    let body: Post = {
+      tipo_post: this.forma.get('tipo_post')!.value,
+      cultivo: this.cultivoSeleccionado,
+      cantidad: this.forma.get('cantidad')!.value,
+      precio: this.forma.get('precio')!.value,
+      descripcion: this.forma.get('descripcion')!.value,
+      imgs: this.imagenesBase64,
+      organico : this.forma.get('organico')!.value,
+      transporte: this.forma.get('transporte')!.value,
+      ubicacion: data_ubicacion,
+      post_owner: data_user,
+    };
+
 
     this.sFDB.createPost(body).subscribe((res) => {
       console.info(res);
     });
   }
   fileChangeEvent(fileInput: any) {
-    console.log(fileInput);
     if (fileInput.target?.files && fileInput.target?.files[0]) {
       // verificar dimension
       const max_size = 20971520;
       const allowed_types = ['image/png', 'image/jpeg'];
       const max_height = 15200;
       const max_width = 25600;
-      
+
       if (!(includes(allowed_types, fileInput.target.files[0].type))) {
-        console.log(fileInput.target.files[0].type);
-        
         this.imageError = 'El tipo de formato no es soportado, solo se pueden subir arhivos en formato ( JPG | PNG )';
         return;
       }
@@ -231,12 +259,10 @@ export class CreatePublicationComponent implements OnInit {
         this.imageError = 'Excede el tamaño del archivo' + max_size / 1000 + 'Mb';
         return;
       }
-
-
       const reader = new FileReader();
-      reader.onload = (e:any) => {
+      reader.onload = (e: any) => {
         console.log(e);
-        
+
         const image = new Image();
         // e.target trae la imagen en formato base 64
         image.src = e.target.result;
@@ -246,10 +272,10 @@ export class CreatePublicationComponent implements OnInit {
           const img_height = rs.currentTarget['height'];
           const img_width = rs.currentTarget['width'];
 
-         
+
           if (img_height > max_height && img_width > max_width) {
             this.imageError =
-          `La dimension maxiam soportada ${max_height} - ${max_width}  'px`;
+              `La dimension maxiam soportada ${max_height} - ${max_width}  'px`;
             return;
           } else {
             this.isImageSaved = true;
@@ -257,15 +283,12 @@ export class CreatePublicationComponent implements OnInit {
           }
         };
       };
-
       reader.readAsDataURL(fileInput.target.files[0]);
     }
-
   }
-  eliminarImagen(value:string){
-  this.imagenesBase64=  this.imagenesBase64.filter(item => item !== value)
+  eliminarImagen(value: string) {
+    this.imagenesBase64 = this.imagenesBase64.filter(item => item !== value)
   }
-
 
   // Get Current Location Coordinates
   private setCurrentLocation() {
@@ -305,7 +328,6 @@ export class CreatePublicationComponent implements OnInit {
     });
   }
 
- 
   // FIXME: Anexar latitud y longitud
 
 

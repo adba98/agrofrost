@@ -9,13 +9,10 @@ export interface Post {
     precio: number;
     descripcion: string;
     imgs: string[];
-    municipio: string;
-    direccion: string;
+       
     transporte: string;
     organico: string;
-    usuario_own: string;
-    celular: number;
-
+   
     ubicacion: Ubicacion;
     post_owner: UserInfo;
 }

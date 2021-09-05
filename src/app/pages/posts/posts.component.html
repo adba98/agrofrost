@@ -201,34 +201,34 @@
                   *ngFor="let post of posts; let i = index"
                 >
                   <div class="card product">
-                    
                     <img
-                    class="img-fluid d-block mx-auto card-img-top"
-                    [src]="post.imgs[0]"
-                    >
-                    
-                    
+                      class="img-fluid d-block mx-auto card-img-top"
+                      [src]="post.imgs[0]"
+                    />
+
                     <div class="card-body info">
-                      
                       <div class="card-title">
                         <h3>
-                          {{post.cultivo}}
+                          {{ post.cultivo.cultivo }}
                         </h3>
+                        <span class="small">
+                          {{ post.cultivo.grupo_de_cultivo }}
+                        </span>
                       </div>
-                      
+
                       <div class="precio">
-                        {{post.precio | currency:'COP':'symbol-narrow' :'3.0-0'}} x Kg
+                        {{
+                          post.precio | currency: "COP":"symbol-narrow":"3.0-0"
+                        }}
+                        x Kg
                       </div>
                       <div class="cantidad">
-                       Cantidad Disponible:  {{post.cantidad}} kg
+                        Cantidad Disponible: {{ post.cantidad }} kg
                       </div>
                       <div class="municipio">
-                        {{post.municipio}}
+                        {{ post.ubicacion.municipio }}
                       </div>
-                    
-                    
                     </div>
-
                   </div>
                 </div>
 
