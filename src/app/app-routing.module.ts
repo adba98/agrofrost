@@ -7,7 +7,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { PricingComponent } from './pages/pricing/pricing.component';
 import { SinginComponent } from './pages/singin/singin.component';
 import { SingupComponent } from './pages/singup/singup.component';
-import { CreatePublicationComponent } from './private-pages/create-publication/create-publication.component';
 import { ContactUsComponent } from './pages/contacus/contact-us.component';
 
 const routes: Routes = [
@@ -48,10 +47,6 @@ const routes: Routes = [
     path: 'singup',
     component: SingupComponent,
   },
-  {
-    path: 'test',
-    component: CreatePublicationComponent,
-  }, 
   {
     path: 'contactus',
     component: ContactUsComponent,

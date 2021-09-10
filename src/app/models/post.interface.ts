@@ -10,8 +10,8 @@ export interface Post {
     descripcion: string;
     imgs: string[];
        
-    transporte: string;
-    organico: string;
+    transporte: boolean;
+    organico: boolean;
    
     ubicacion: Ubicacion;
     post_owner: UserInfo;

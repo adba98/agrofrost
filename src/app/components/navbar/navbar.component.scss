@@ -15,3 +15,34 @@
 nav {
   margin-bottom: 100px;
 }
+
+#barra{
+
+  justify-content: center;
+  
+}
+
+#barra ul{
+ justify-content: space-around;
+ align-items: center;
+ margin: 0  !important;
+ 
+}
+
+.singIn-Up{
+
+display: grid;
+grid-template-columns: 1fr 1fr;
+flex-flow: row;
+justify-items: stretch;
+}
+
+.singIn-Up .nav-item{
+  
+  place-self: end stretch ;
+  padding: 5px;
+}
+.singIn-Up .nav-item a{ 
+  place-self: center stretch  ;
+  padding: 10px;
+}

@@ -15,9 +15,7 @@ export class CultivoPipe implements PipeTransform {
 
     }
     transform(value: Cultivo) {
-        console.log(value);
-        console.log(typeof (value));
-
+       
         if (value == null) {
             return '';
         } else {
@@ -29,5 +27,5 @@ export class CultivoPipe implements PipeTransform {
             return ` ${nombre}${opcional} - ${grupo}`
         }
     }
-
+   
 }

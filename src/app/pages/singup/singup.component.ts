@@ -49,14 +49,12 @@ export class SingupComponent implements OnInit {
     }
 
     if (!form.pristine && form.valid) {
-      console.log('Formulario valiido');
-
       
       Swal.fire({
         icon:'info',       
         text: 'Espere por favor',
         allowOutsideClick:false,
-      })
+      });
 
       Swal.showLoading();
       this.auth.createUserWithEmail(this.user)

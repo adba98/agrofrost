@@ -2,7 +2,7 @@ import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, timeout } from 'rxjs/operators';
 
 
 import { Geocoder, MapsAPILoader, MouseEvent } from '@agm/core';
@@ -18,6 +18,7 @@ import { Market } from './maket.class';
 import { DepatamentosYmunicipiosService, MunicipioInfo } from '../../services/depatamentos-ymunicipios.service';
 import { Post } from 'src/app/models/post.interface';
 import { Ubicacion, GeoCode, UserInfo } from '../../models/post.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-publication',
@@ -108,7 +109,7 @@ export class CreatePublicationComponent implements OnInit {
   createForm() {
     this.forma = this.fb.group({
       tipo_post: ['', [Validators.required], ''],
-      cultivo: ['', [Validators.required], Validators.minLength(5), ''],
+      cultivo: ['', [Validators.required, Validators.minLength(1)], ''],
       descripcion: ['', [Validators.required, Validators.minLength(10)], ''],
       cantidad: ['', [Validators.required, Validators.minLength(1), Validators.min(1)], ''],
       precio: ['', [Validators.required, Validators.minLength(3), Validators.min(100)], ''],
@@ -200,29 +201,31 @@ export class CreatePublicationComponent implements OnInit {
   savePost() {
     this.forma.markAllAsTouched();
     if (this.forma.invalid) {
+      Swal.fire('Revisa los datos ingresados', 'Existe uno o varios datos invalidos dentro del formulario', 'error');
       return;
     }
     if (this.cultivoSeleccionado == null) {
-      return
+      Swal.fire('Error', 'No se ha seleccionado cultivo ', 'error');
+      return;
     }
 
 
 
-   let data_geolocalizacion : GeoCode= {
-     lat: this.market.lat,
-     lng: this.market.long,
-   };
-    let data_ubicacion: Ubicacion= {
+    let data_geolocalizacion: GeoCode = {
+      lat: this.market.lat,
+      lng: this.market.long,
+    };
+    let data_ubicacion: Ubicacion = {
       departamento: 'Cundinamarca',
       municipio: this.forma.get('municipio')!.value,
       direccion: this.forma.get('direccion')!.value,
-      geolocalizacion : data_geolocalizacion,
+      geolocalizacion: data_geolocalizacion,
     };
 
-    let data_user: UserInfo= {
-        celular: this.forma.get('celular')!.value,
-        correo : sessionStorage.getItem('emailUser')|| localStorage.getItem('token') || 'error',
-        nombre : 'Usuario Pruebas'
+    let data_user: UserInfo = {
+      celular: this.forma.get('celular')!.value,
+      correo: sessionStorage.getItem('emailUser') || localStorage.getItem('token') || 'error',
+      nombre: 'Usuario Pruebas'
     }
 
     let body: Post = {
@@ -232,15 +235,38 @@ export class CreatePublicationComponent implements OnInit {
       precio: this.forma.get('precio')!.value,
       descripcion: this.forma.get('descripcion')!.value,
       imgs: this.imagenesBase64,
-      organico : this.forma.get('organico')!.value,
-      transporte: this.forma.get('transporte')!.value,
+      organico: (this.forma.get('organico')!.value) == "Si" ? true : false,
+      transporte: (this.forma.get('transporte')!.value == "Si") ? true : false,
       ubicacion: data_ubicacion,
       post_owner: data_user,
     };
 
 
+    Swal.fire({
+      icon: 'info',
+      text: 'Almacenando publicación',
+      allowOutsideClick: false
+    });
+
+
     this.sFDB.createPost(body).subscribe((res) => {
-      console.info(res);
+
+      setTimeout(() => {
+        Swal.close()
+      },
+        5000
+      );
+
+      // this.router.navigate(['/home']);
+
+      if (res) {
+        Swal.fire(
+          'Proceso Exitoso!',
+          'Se almaceno correctamente la información  {{res | json }}',
+          'success'
+        )
+      }
+
     });
   }
   fileChangeEvent(fileInput: any) {

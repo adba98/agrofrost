@@ -40,7 +40,7 @@
               </div>
             </div>
             <div *ngIf="campoEsInvalido('tipo_post')" class="message-error">
-              Debe ingresar un valor valido
+              Debe seleccionar un tipo de publicación
             </div>
           </div>
           <div class="mb-3">
@@ -54,7 +54,7 @@
               [class.is-invalid]="campoEsInvalido('cultivo')"
             />
             <div *ngIf="campoEsInvalido('cultivo')" class="message-error">
-              Debe ingresar un valor valido
+              Debe buscar y seleccionar un producto
             </div>
             <button
               *ngIf="cultivoSeleccionado"
@@ -116,7 +116,7 @@
             ></textarea>
 
             <div *ngIf="campoEsInvalido('descripcion')" class="message-error">
-              Debe ingresar un valor valido
+              Debe ingrear una descripción (minimo 10 caracteres)
             </div>
           </div>
           <div class="mb-3">
@@ -147,7 +147,7 @@
               [class.is-invalid]="campoEsInvalido('precio')"
             />
             <div *ngIf="campoEsInvalido('precio')" class="message-error">
-              Debe ingresar un precio, superior 0
+              Debe ingresar un precio, superior 100
             </div>
           </div>
           <div class="mb-3">
@@ -346,7 +346,7 @@
           <label class="form-label" for="celular"> Numero Celular</label>
           <br />
           <small class="small"
-            >(Sera visble unicamente para usuarios Regitrados)</small
+            >(Sera visble unicamente para usuarios Registrados)</small
           >
           <input
             class="form-control item"

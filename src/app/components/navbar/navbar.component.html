@@ -2,36 +2,41 @@
   class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar"
 >
   <div class="container">
-    <a id="brand-logo" class="navbar-brand logo" [routerLink]="'/home'">
-      <img
-        src="./assets/img/logos/logo-st.png"
-        width="auto"
-        height="50"
-        alt="Agrofrost Logo"
-      />
-      <div id="brand-logo-texto">
-        <div>Agrofrost</div>
-        <div id="eslogan">
-          Conectando el agro <br />
-          con el mundo
+    <div>
+      <a id="brand-logo" class="navbar-brand logo" [routerLink]="'/home'">
+        <img
+          src="./assets/img/logos/logo-st.png"
+          width="auto"
+          height="50"
+          alt="Agrofrost Logo"
+        />
+        <div id="brand-logo-texto">
+          <div>Agrofrost</div>
+          <div id="eslogan">
+            Conectando el agro <br />
+            con el mundo
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
 
     <button
       data-bs-toggle="collapse"
       class="navbar-toggler"
       data-bs-target="#navcol-1"
-      [ngClass]="{'collapsed': navbarOpen}"
-      (click)='toggleNavbar()'
+      [ngClass]="{ collapsed: navbarOpen }"
+      (click)="toggleNavbar()"
     >
       <span class="visually-hidden">Toggle navigation</span
-      ><span class="navbar-toggler-icon" ></span>
+      ><span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navcol-1"
-    [ngClass]="{'show': !navbarOpen}"
-    (click)='toggleNavbar()'>
+    <div
+      class="collapse navbar-collapse"
+      id="barra"
+      [ngClass]="{ show: !navbarOpen }"
+      (click)="toggleNavbar()"
+    >
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" *ngFor="let path of paths">
           <a
@@ -41,36 +46,69 @@
             [routerLinkActive]="'active'"
             >{{ path.name }}</a
           >
-          
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/p'"> Privado</a>
-        </li>
+        <div class="singIn-Up">
+          <ng-container *ngIf="!isLogin; else logoutOption">
+            <li class="nav-item">
+              <a
+                class="
+                  btn-outline-primary
+                  primary
+                  nav-link
+                  active
+                  btn
+                  text-white
+                "
+                [routerLink]="'/singin'"
+              >
+                Iniciar Sesión
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="
+                  btn-outline-secondary
+                  secondary
+                  nav-link
+                  active
+                  btn
+                  text-white
+                "
+                [routerLink]="'/singup'"
+              >
+                Registrarse
+              </a>
+            </li>
+          </ng-container>
 
-        <ng-container *ngIf=" !isLogin  else logoutOption">
-          <li class="nav-item" >
-            <a class="btn-outline-primary primary nav-link active btn text-white"
-            [routerLink]="'/singin'">
-            Iniciar Sesión
-            </a>
-          </li>
-          <li class="nav-item" >
-            <a class="btn-outline-secondary secondary nav-link active btn text-white"
-            [routerLink]="'/singup'">
-            Registrarse
-            </a>
-          </li>
-        </ng-container>
-        
-        <ng-template #logoutOption> 
-          <a 
-            class="btn-outline-primary primary nav-link active btn text-white"
-           (click) = "logout()"
-          >
-            Cerrar sesióm
-          </a>
-        </ng-template>   
+          <ng-template #logoutOption>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                aria-current="page"
+                [routerLink]="'/p'"
+                [routerLinkActive]="'active'"
+                >Perfil <i class="fas fa-user-circle"></i
+              ></a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="
+                  btn-outline-primary
+                  primary
+                  nav-link
+                  active
+                  btn
+                  text-white
+                "
+                (click)="logout()"
+              >
+                Cerrar sesión
+              </a>
+            </li>
+          </ng-template>
+        </div>
       </ul>
     </div>
   </div>

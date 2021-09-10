@@ -1,6 +1,18 @@
 @import "boostrap_custom.scss";
 @import "~bootstrap-scss/bootstrap.scss";
 
+
+
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts/";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
+$css-a :"~animate.sass/scss/animate.scss";
+@import "~animate.sass/scss/animate.scss";
+
+
 /* You can add global styles to this file, and also import other style files */
 .container,
 .container-fluid,
@@ -45,7 +57,13 @@ main.page {
   }
 }
 
-.fade-rigth {
-}
-.fade-left {
+
+
+.page{
+  @extend .animated;
+  @extend .fadeInDown;
+  //@extend .faster;
+  --animate-duration: 0.1s;
+  animation-duration: 0.5s;
+
 }
