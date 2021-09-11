@@ -1,6 +1,6 @@
 import { TitleCasePipe } from "@angular/common";
 import { Pipe, PipeTransform } from "@angular/core";
-import { Cultivo } from '../models/RestAgricultureResponse.interace';
+import { Cultivo } from '../../models/RestAgricultureResponse.interace';
 
 
 @Pipe({

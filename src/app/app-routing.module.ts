@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
+
+import { AuthGuard } from './auth/guards/auth.guard';
+
 import { AboutComponent } from './pages/about/about.component';
 import { FeauturesComponent } from './pages/feautures/feautures.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PricingComponent } from './pages/pricing/pricing.component';
-import { SinginComponent } from './pages/singin/singin.component';
-import { SingupComponent } from './pages/singup/singup.component';
 import { ContactUsComponent } from './pages/contacus/contact-us.component';
+import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
+  },
+  {
+    path: 'auth',
+    loadChildren: ()=>AuthModule,
+    
   },
   {
     path: 'about',
@@ -27,37 +33,26 @@ const routes: Routes = [
     component: PricingComponent,
   },
   {
-    path: 'posts',
-    loadChildren: () =>
-    import('./pages/posts/posts.module').then((m) => m.PostsModule),
-  },
-  {
-    path: 'p',
-    loadChildren: () =>
-    import('./private-pages/private-pages.module').then(
-      (m) => m.PrivatePagesModule
-      ),
-      canActivate:[ AuthGuard]    // FIXME: Corregir usar canLoad
-  },
-  {
-    path: 'singin',
-    component: SinginComponent,
-  },
-  {
-    path: 'singup',
-    component: SingupComponent,
-  },
-  {
     path: 'contactus',
     component: ContactUsComponent,
-  }, 
+  },
   {
-    path: 'about',
-    component: AboutComponent,
-  }, 
+    path: 'posts',
+    loadChildren: () =>
+      import('./posts/posts.module').then((m) => m.PostsModule),
+  },
+  {
+    path: 'private',
+    loadChildren: () =>
+      import('./private-pages/private-pages.module').then(
+        (m) => m.PrivatePagesModule
+      ),
+    canLoad: [AuthGuard],
+    canActivate: [ AuthGuard]
+  },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: '',
   },
 ];
 
@@ -65,4 +60,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { useHash: true })], // use hash to manage url on firebase
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

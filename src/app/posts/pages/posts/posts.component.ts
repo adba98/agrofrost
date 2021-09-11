@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseRealtimeDBService } from '../../services/firebase-realtime-db.service';
-import { Post } from '../../models/post.interface';
+import { FirebaseRealtimeDBService } from '../../../services/firebase-realtime-db.service';
+import { Post } from '../../interfaces/post.interface';
 
 @Component({
   selector: 'app-posts',

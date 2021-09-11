@@ -9,16 +9,13 @@ import { Geocoder, MapsAPILoader, MouseEvent } from '@agm/core';
 // import { google } from '@agm/core/services/google-maps-types';
 import { includes, values } from 'lodash';
 
-
-
-import { Cultivo } from 'src/app/models/RestAgricultureResponse.interace';
-import { AgricultureService } from '../../services/agriculture.service';
-import { FirebaseRealtimeDBService } from '../../services/firebase-realtime-db.service';
-import { Market } from './maket.class';
-import { DepatamentosYmunicipiosService, MunicipioInfo } from '../../services/depatamentos-ymunicipios.service';
-import { Post } from 'src/app/models/post.interface';
-import { Ubicacion, GeoCode, UserInfo } from '../../models/post.interface';
 import Swal from 'sweetalert2';
+import { Cultivo } from 'src/app/models/RestAgricultureResponse.interace';
+import { Market } from './maket.class';
+import { AgricultureService } from 'src/app/services/agriculture.service';
+import { FirebaseRealtimeDBService } from 'src/app/services/firebase-realtime-db.service';
+import { DepatamentosYmunicipiosService, MunicipioInfo } from 'src/app/services/depatamentos-ymunicipios.service';
+import { GeoCode, Post, Ubicacion, UserInfo } from '../../interfaces/post.interface';
 
 @Component({
   selector: 'app-create-publication',

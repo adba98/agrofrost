@@ -23,49 +23,53 @@ import { AgmCoreModule } from "@agm/core";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './components-layout/navbar/navbar.component';
 import { PagesModule } from './pages/pages.module';
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from './components-layout/footer/footer.component';
 import { PrivatePagesModule } from './private-pages/private-pages.module';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 
 //import { AgmCoreModule } from '@agm/core';
 
 import { environment } from '../environments/environment';
+import { AuthModule } from './auth/auth.module';
+import { PostsModule } from './posts/posts.module';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FooterComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-
+  
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
     AngularFireAuthModule,
 
     AgmCoreModule.forRoot(
       {
-      apiKey: environment.gcpApi.api.apiKey, 
-      libraries: ['places']
-     }
+        apiKey: environment.gcpApi.api.apiKey,
+        libraries: ['places']
+      }
     ),
 
     AppRoutingModule,
+    AuthModule,
     PagesModule,
     PrivatePagesModule,
+    PostsModule
   ],
   providers: [
     UserTrackingService,
     ScreenTrackingService,
     { provide: LANGUAGE_CODE, useValue: 'fr' },
+    
+    AuthService
   ],
-  exports:[
+  exports: [
     AgmCoreModule
   ],
-  bootstrap: [AppComponent] 
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

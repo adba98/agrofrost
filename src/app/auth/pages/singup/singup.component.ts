@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {Router} from "@angular/router"
-import { UserRegisterModel } from 'src/app/models/user.model';
-import { AuthService } from '../../services/auth.service';
+
+import Swal from 'sweetalert2';
+
 import {
   DepatamentosYmunicipiosService,
   MunicipioInfo,
 } from 'src/app/services/depatamentos-ymunicipios.service';
-import Swal from 'sweetalert2';
+
+import { AuthService } from '../../services/auth.service';
+import { UserRegisterModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-singup',

@@ -5,7 +5,8 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { UserRegisterModel, UserLoginModel } from '../models/user.model';
+import { UserLoginModel, UserRegisterModel } from '../models/user.model';
+
 
 
 @Injectable({
@@ -25,14 +26,13 @@ export class AuthService {
 
   userTryToEnter: string = '';
 
-  public changinLoginStatusSubject = new Subject<boolean>();
-  public changinLoginStatus$ = this.changinLoginStatusSubject.asObservable();
+  public changingLoginStatusSubject = new Subject<boolean>();
+  public changingLoginStatus$ = this.changingLoginStatusSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    if(this.isLogginIn('')){
-      this.changinLoginStatusSubject.next(true);
+    if (this.isLogginIn('')) {
+      this.changingLoginStatusSubject.next(true);
       console.log("sigue activvo");
-      
     }
   }
 
@@ -71,28 +71,34 @@ export class AuthService {
       );
   }
   logout() {
+    console.log("cierra sesion");
     localStorage.removeItem(this.LS_TOKENKEY);
-    this.changinLoginStatusSubject.next(false);
+    this.changingLoginStatusSubject.next(false);
   }
 
   private saveToken(idToken: string) {
     this.userToken = idToken;
+
     localStorage.setItem(this.LS_TOKENKEY, idToken);
-    this.changinLoginStatusSubject.next(true);
-    
+    this.changingLoginStatusSubject.next(true);
+  
+
     const exp: number = new Date().setSeconds(this.timeToLogout);
     localStorage.setItem(this.LS_EXPIRATIONTIME, exp.toString());
   }
-  private readToken():string {
-    
-    if(localStorage.getItem('token')){
+
+
+  private readToken(): string {
+
+    if (localStorage.getItem('token')) {
       this.userToken = localStorage.getItem('token') || "";
-    }else{
+    } else {
       this.userToken = '';
     }
     return this.userToken;
   }
-  isLogginIn(url: string): boolean {
+
+  isLogginIn(url: string = ''): boolean {
     if (this.readToken().length < 2) {
       this.userTryToEnter = url;
       return false;
@@ -111,32 +117,32 @@ export class AuthService {
 }
 
 export interface SingOK {
-  kind:         string;
-  idToken:      string;
-  email:        string;
+  kind: string;
+  idToken: string;
+  email: string;
   refreshToken: string;
-  expiresIn:    string;
-  localId:      string;
+  expiresIn: string;
+  localId: string;
 }
 
 
 
 
 //// 
-export interface  SingUpError {
+export interface SingUpError {
   error: WelcomeError;
 }
 
 export interface WelcomeError {
-  code:    number;
+  code: number;
   message: string;
-  errors:  ErrorElement[];
+  errors: ErrorElement[];
 }
 
 export interface ErrorElement {
   message: string;
-  domain:  string;
-  reason:  string;
+  domain: string;
+  reason: string;
 }
 
 

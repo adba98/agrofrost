@@ -1,13 +1,15 @@
 import { Component, ErrorHandler, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-import { NgForm } from '@angular/forms';
 
 import firebase from 'firebase/app';
 import Swal from 'sweetalert2';
+
 import { UserLoginModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-singin',
@@ -37,7 +39,7 @@ export class SinginComponent implements OnInit {
     //firebase.auth().languageCode = 'es';
   }
 
-  loginWithEmailAndPassword() {}
+
 
   loginWithGoogle() {
     let provider = new firebase.auth.GoogleAuthProvider();
@@ -73,20 +75,20 @@ export class SinginComponent implements OnInit {
 
   loginBasicEmailAndPassword(form: NgForm) {
     if (form.invalid) return;
+
     // TODO: poner validadciones
     this.auth2.loginUserWithEmail(this.user).subscribe(
-      (res) => {
-        this.routerRedirectUrl = this.auth2.userTryToEnter || '/p';
+      (res:any) => {
+        this.routerRedirectUrl = this.auth2.userTryToEnter || '/private';
         this.auth2.userTryToEnter = '';
 
         this.router.navigate([this.routerRedirectUrl]);
-        console.log('redigiendo a', this.routerRedirectUrl);
 
         if (this.remindMe) {
           localStorage.setItem('user', this.user.email);
         }
       },
-      (err) => {
+      (err:any) => {
         console.log(err);
 
         let message = err.error.error.message;

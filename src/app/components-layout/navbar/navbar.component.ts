@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -30,20 +32,19 @@ export class NavbarComponent implements OnInit {
       name: 'Caracteriticas ',
       path: '/feautures',
     },
-    // {
-    //   name: 'Planes ',
-    //   path: '/pricing',
-    // },
   ];
 
   constructor(private auth: AuthService, private router: Router) {
-    this.isLogin = this.auth.isLogginIn('');
-    this.auth.changinLoginStatus$.subscribe((status: boolean) => {
+    this.isLogin = this.auth.isLogginIn();
+    this.auth.changingLoginStatus$.subscribe((status:boolean) => {
+      console.log(`Observable ${status}`  );
       this.isLogin = status;
-    });
+    },(err) =>{console.log("Error subsctibcion")});
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
   logout() {
     this.auth.logout();
     this.router.navigate(['/']);

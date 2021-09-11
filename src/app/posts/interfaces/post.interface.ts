@@ -1,4 +1,4 @@
-import { Cultivo } from './RestAgricultureResponse.interace';
+import { Cultivo } from '../../models/RestAgricultureResponse.interace';
 export interface Post {
     id?: string
     tipo_post: string;
