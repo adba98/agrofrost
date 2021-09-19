@@ -1,0 +1,55 @@
+<div class="card product">
+  <a
+    [routerLink]="['/posts/view',post.id]"
+    routerLinkActive="router-link-active"
+  >
+    <img class="img-fluid d-block mx-auto card-img-top" [src]="post.imgs[0]" />
+
+    <div class="card-body">
+      <div class="info">
+        <div class="card-title nombre-cultivo">
+          <h3>
+            {{ post.cultivo_info.cultivo }}
+          </h3>
+          <span class="small">
+            {{ post.cultivo_info.grupo_de_cultivo }}
+          </span>
+        </div>
+
+        <div class="cantidad">
+          <i class="fas fa-shopping-cart"></i>
+          <strong> Disponible: </strong> {{ post.cantidad }} kg
+        </div>
+
+        <div class="caracteristicas my-3">
+          <i class="fas fa-shipping-fast"></i>
+          <i *ngIf="post.caracteristicas.transporte" class="fas fa-check"></i>
+          <i *ngIf="!post.caracteristicas.transporte" class="fas fa-ban"></i>
+
+          <i class="fas fa-leaf"></i>
+          <i *ngIf="post.caracteristicas.organico" class="fas fa-check"></i>
+          <i *ngIf="!post.caracteristicas.organico" class="fas fa-ban"></i>
+         
+          <i class="fas fa-plane-departure"></i>
+          <i *ngIf="post.caracteristicas.exportacion" class="fas fa-check"></i>
+          <i *ngIf="!post.caracteristicas.exportacion" class="fas fa-ban"></i>
+        </div>
+
+        <div class="end-card">
+          <div class="precio">
+            <i class="fas fa-tags"></i>
+            {{ post.precio | currency: "COP":"symbol-narrow":"3.0-0" }}
+            x Kg
+          </div>
+
+          <div class="municipio">
+            <span>
+              {{ post.ubicacion.municipio }}
+            </span>
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

@@ -15,14 +15,14 @@ import { Market } from './maket.class';
 import { AgricultureService } from 'src/app/services/agriculture.service';
 import { FirebaseRealtimeDBService } from 'src/app/services/firebase-realtime-db.service';
 import { DepatamentosYmunicipiosService, MunicipioInfo } from 'src/app/services/depatamentos-ymunicipios.service';
-import { GeoCode, Post, Ubicacion, UserInfo } from '../../interfaces/post.interface';
+import { GeoCode, Post, Caracteristicas, Ubicacion, UserInfo } from '../../interfaces/post.interface';
 
 @Component({
-  selector: 'app-create-publication',
-  templateUrl: './create-publication.component.html',
-  styleUrls: ['./create-publication.component.scss'],
+  selector: 'app-create-post',
+  templateUrl: './create-post.component.html',
+  styleUrls: ['./create-post.component.scss'],
 })
-export class CreatePublicationComponent implements OnInit {
+export class CreatePostComponent implements OnInit {
   public forma!: FormGroup;
 
   public cultivos: Cultivo[] = [];
@@ -112,6 +112,7 @@ export class CreatePublicationComponent implements OnInit {
       precio: ['', [Validators.required, Validators.minLength(3), Validators.min(100)], ''],
       transporte: ['', [Validators.required], ''],
       organico: ['', [Validators.required], ''],
+      exportacion: ['', [Validators.required], ''],
       municipio: ['', [Validators.required,], ''],
       direccion: ['', [Validators.required,], ''],
       celular: ['', [Validators.required,], ''],
@@ -219,25 +220,31 @@ export class CreatePublicationComponent implements OnInit {
       geolocalizacion: data_geolocalizacion,
     };
 
+    let caracteristicas: Caracteristicas ={
+
+      organico: (this.forma.get('organico')!.value) == "Si" ? true : false,
+      transporte: (this.forma.get('transporte')!.value == "Si") ? true : false,
+      exportacion : (this.forma.get('transporte')!.value == "Si") ? true : false,
+    }
     let data_user: UserInfo = {
       celular: this.forma.get('celular')!.value,
       correo: sessionStorage.getItem('emailUser') || localStorage.getItem('token') || 'error',
       nombre: 'Usuario Pruebas'
     }
 
+    
+
     let body: Post = {
       tipo_post: this.forma.get('tipo_post')!.value,
-      cultivo: this.cultivoSeleccionado,
+      cultivo_info: this.cultivoSeleccionado,
       cantidad: this.forma.get('cantidad')!.value,
       precio: this.forma.get('precio')!.value,
       descripcion: this.forma.get('descripcion')!.value,
       imgs: this.imagenesBase64,
-      organico: (this.forma.get('organico')!.value) == "Si" ? true : false,
-      transporte: (this.forma.get('transporte')!.value == "Si") ? true : false,
+      caracteristicas: caracteristicas,
       ubicacion: data_ubicacion,
       post_owner: data_user,
     };
-
 
     Swal.fire({
       icon: 'info',
@@ -245,9 +252,7 @@ export class CreatePublicationComponent implements OnInit {
       allowOutsideClick: false
     });
 
-
     this.sFDB.createPost(body).subscribe((res) => {
-
       setTimeout(() => {
         Swal.close()
       },
@@ -309,6 +314,7 @@ export class CreatePublicationComponent implements OnInit {
       reader.readAsDataURL(fileInput.target.files[0]);
     }
   }
+  
   eliminarImagen(value: string) {
     this.imagenesBase64 = this.imagenesBase64.filter(item => item !== value)
   }
@@ -350,8 +356,4 @@ export class CreatePublicationComponent implements OnInit {
 
     });
   }
-
-  // FIXME: Anexar latitud y longitud
-
-
 }

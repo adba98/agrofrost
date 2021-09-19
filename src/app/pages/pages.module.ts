@@ -13,6 +13,8 @@ import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { ServicesPageComponent } from './services-page/services-page.component';
 import { ContactUsComponent } from './contacus/contact-us.component';
 import { SharedModule } from '../components-shared/shared.module';
+import { CultivoPipe } from '../posts/pipes/Cultivo.pipe';
+import { PostsModule } from '../posts/posts.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,10 @@ import { SharedModule } from '../components-shared/shared.module';
     ServicesPageComponent,
   ],
   imports: [CommonModule, [RouterModule], FormsModule,
-    SharedModule],
+    SharedModule,
+  PostsModule
+  ],
+  
   exports: [
     HomeComponent,
     AboutComponent,

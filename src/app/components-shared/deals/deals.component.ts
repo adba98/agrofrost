@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseRealtimeDBService } from 'src/app/services/firebase-realtime-db.service';
+import { Post } from '../../posts/interfaces/post.interface';
 
 @Component({
   selector: 'app-deals',
@@ -8,15 +10,17 @@ import { Component, OnInit } from '@angular/core';
 export class DealsComponent implements OnInit {
 
   demandas = [{}];
-  ofertas = [
-    {
-      imagen: 'assets/img/scenery/image5.jpg',
-      titulo: 'Arveja de Cabrera',
-    },
-  ];
-  constructor() { }
+
+
+
+  ofertas:Post[] = [];
+
+
+  constructor(private db: FirebaseRealtimeDBService) { }
 
   ngOnInit(): void {
+    this.db.getAllPost().subscribe(res => this.ofertas= res
+    );
   }
 
 

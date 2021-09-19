@@ -200,65 +200,13 @@
                   class="col-12 col-md-6 col-lg-4"
                   *ngFor="let post of posts; let i = index"
                 >
-                  <div class="card product">
-                    <img
-                      class="img-fluid d-block mx-auto card-img-top"
-                      [src]="post.imgs[0]"
-                    />
+                  <app-product-card [post]="post"> </app-product-card>
+                </div>
 
-                    <div class="card-body">
-                      <div class="info">
-                      <div class="card-title nombre-cultivo">
-
-                          <h3>
-                            {{ post.cultivo.cultivo }}
-                          </h3>
-                          <span class="small">
-                            {{ post.cultivo.grupo_de_cultivo }}
-                          </span>
-                        </div>
-                        
-                        <div class="cantidad">
-                          <i class="fas fa-shopping-cart"></i>
-                          <strong> Disponible: </strong> {{ post.cantidad }} kg
-                        </div>
-                        
-                        <div class="caracteristicas my-3">
-                          <i  class="fas fa-shipping-fast"></i>
-                          <i *ngIf="post.transporte" class="fas fa-check"></i>
-                          <i *ngIf="!post.transporte" class="fas fa-ban"></i>
-
-                          <i  class="fas fa-leaf"></i>
-                          <i *ngIf="post.organico" class="fas fa-check"></i>
-                          <i *ngIf="!post.organico" class="fas fa-ban"></i>
-                        </div>
-
-                        <div class="end-card">
-                          <div class="precio">
-                            <i class="fas fa-tags"></i>
-                            {{
-                              post.precio
-                              | currency: "COP":"symbol-narrow":"3.0-0"
-                            }}
-                            x Kg
-                          </div>
-                          
-                          <div class="municipio">
-                            <span>
-                              {{ post.ubicacion.municipio }}
-                            </span>
-                            <i class="fas fa-map-marked-alt"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                  
-                  <div class="col-12 col-md-6 col-lg-4">
-                    <div class="clean-product-item">
-                      <div class="image">
-                        <a href="#"
+                 <div class="col-12 col-md-6 col-lg-4">
+                  <div class="clean-product-item">
+                    <div class="image">
+                      <a href="#"
                         ><img
                           class="img-fluid d-block mx-auto"
                           src="assets/img/tech/image2.jpg" /></a
@@ -278,7 +226,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> 
               </div>
 
               <nav>
@@ -309,3 +257,5 @@
     </div>
   </section>
 </main>
+
+<router-outlet ></router-outlet>

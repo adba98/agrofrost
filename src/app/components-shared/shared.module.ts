@@ -11,7 +11,7 @@ import { SliderComponent } from './slider/slider.component';
     SliderComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports:[
     DealsComponent,

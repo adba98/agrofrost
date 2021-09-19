@@ -177,6 +177,32 @@
             </div>
           </div>
           <div class="mb-3">
+            <p class="form-label">
+              ¿Producto tiene aval para expotación?
+            </p>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">Si</label>
+              <input
+                class="form-check-input"
+                type="radio"
+                value="Si"
+                formControlName="exportacion"
+              />
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-chkeck-label">No</label>
+              <input
+                class="form-check-input"
+                type="radio"
+                value="No"
+                formControlName="exportacion"
+              />
+            </div>
+            <div *ngIf="campoEsInvalido('exportacion')" class="message-error">
+              Debe indicar si el producto tiene aval para expotación
+            </div>
+          </div>
+          <div class="mb-3">
             <p
               class="form-label"
               [class.text-danger]="campoEsInvalido('organico')"
@@ -368,8 +394,6 @@
         </button>
       </form>
     </div>
-    {{ forma.value | json }}
-    <hr />
-    <!-- {{ imagenes.value | json }} -->
+ 
   </section>
 </main>

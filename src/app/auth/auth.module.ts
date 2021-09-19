@@ -25,7 +25,8 @@ import { AuthRoutingModule } from './auth-routing.module';
     AuthRoutingModule
   ],
   providers:[
-   // AuthService FIXME: Porque asi si funciona https://stackoverflow.com/questions/68276680/angular-2-rxjs-subject-next-not-working-in-some-cases/69122864#69122864
+  // AuthService 
+   //FIXME: Porque asi si funciona https://stackoverflow.com/questions/68276680/angular-2-rxjs-subject-next-not-working-in-some-cases/69122864#69122864
   ],
 
   exports:[

@@ -16,7 +16,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'auth',
+    path: '',
     loadChildren: ()=>AuthModule,
     
   },

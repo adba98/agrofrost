@@ -2,19 +2,25 @@ import { Cultivo } from '../../models/RestAgricultureResponse.interace';
 export interface Post {
     id?: string
     tipo_post: string;
-    
-    cultivo: Cultivo;
+
+    cultivo_info: Cultivo;
 
     cantidad: number;
     precio: number;
     descripcion: string;
     imgs: string[];
        
-    transporte: boolean;
-    organico: boolean;
+    caracteristicas: Caracteristicas; 
    
     ubicacion: Ubicacion;
     post_owner: UserInfo;
+}
+
+export interface Caracteristicas{
+
+    transporte: boolean;
+    organico: boolean;
+    exportacion:boolean;
 }
 
 export interface GeoCode {
