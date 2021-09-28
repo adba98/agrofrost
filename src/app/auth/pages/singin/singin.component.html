@@ -9,16 +9,16 @@
         <div class="block-heading">
           <h2 class="text-info">Ingresar</h2>
           <p>
-            Para inicar sesión debes estar regitrado, si no lo estas. da click
+            Para iniciar sesión debes estar registrado, si no lo estas. da clic 
             <a class="text-info" [routerLink]="'/singup'">
-              aqui para registarte</a
+              aquí para registrarte</a
             >
           </p>
         </div>
 
         <form #f="ngForm" (ngSubmit)="loginBasicEmailAndPassword(f)">
           <div class="mb-3">
-            <label class="form-label" for="email">Correo electronico</label
+            <label class="form-label" for="email">Correo electrónico</label
             ><input
               class="form-control item"
               type="email"
@@ -46,7 +46,7 @@
               >
             </div>
           </div>
-          <button class="btn btn-primary w-100 text-white" type="submit">Iniciar Sesion</button>
+          <button class="btn btn-primary w-100 text-white" type="submit">Iniciar Sesión</button>
 
           <!-- <div class="federado">
             <button class="google" (click)="loginWithGoogle()">
