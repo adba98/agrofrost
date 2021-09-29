@@ -15,6 +15,8 @@ import { ContactUsComponent } from './contacus/contact-us.component';
 import { SharedModule } from '../components-shared/shared.module';
 import { CultivoPipe } from '../posts/pipes/Cultivo.pipe';
 import { PostsModule } from '../posts/posts.module';
+import { TermsComponent } from './terms/terms.component';
+import { AdsModule } from '../ads/ads.module';
 
 @NgModule({
   declarations: [
@@ -25,10 +27,12 @@ import { PostsModule } from '../posts/posts.module';
     ContactUsComponent,
     TestimonialsComponent,
     ServicesPageComponent,
+    TermsComponent
   ],
   imports: [CommonModule, [RouterModule], FormsModule,
     SharedModule,
-  PostsModule
+  PostsModule,
+  AdsModule
   ],
   
   exports: [

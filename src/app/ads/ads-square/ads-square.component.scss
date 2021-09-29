@@ -1,0 +1,16 @@
+@import "src/styles";
+
+div.ads-square{
+    height: 100%;
+
+    background-color: rgba($color: gray, $alpha: .1);
+    border-radius: 10px;
+  
+
+}
+p{
+    text-align: center;
+    font-size: smaller;
+    font-weight: bolder;
+    
+}

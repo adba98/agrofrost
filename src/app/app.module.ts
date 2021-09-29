@@ -36,6 +36,7 @@ import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { AdsModule } from './ads/ads.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FooterComponent],
@@ -58,7 +59,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
     AuthModule,
     PagesModule,
     PrivatePagesModule,
-    PostsModule
+    PostsModule,
+    AdsModule
   ],
   providers: [
     UserTrackingService,
@@ -68,7 +70,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
     AuthService
   ],
   exports: [
-    AgmCoreModule
+    AgmCoreModule,
   ],
   bootstrap: [AppComponent]
 })

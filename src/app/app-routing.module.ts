@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { PricingComponent } from './pages/pricing/pricing.component';
 import { ContactUsComponent } from './pages/contacus/contact-us.component';
 import { AuthModule } from './auth/auth.module';
+import { TermsComponent } from './pages/terms/terms.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,9 @@ const routes: Routes = [
     path: 'contactus',
     component: ContactUsComponent,
   },
+  {
+    path:'terms',
+  component: TermsComponent  },
   {
     path: 'posts',
     loadChildren: () =>

@@ -29,6 +29,7 @@
     "bootstrap-scss": "^5.0.2",
     "firebase": "^8.7.0",
     "lodash": "^4.17.21",
+    "ng2-adsense": "^10.0.1",
     "npm": "^7.20.6",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.1.2",

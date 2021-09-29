@@ -16,6 +16,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from '../components-shared/shared.module';
 import { RelatedItemsComponent } from './shared/related-items/related-items.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { AdsenseModule } from 'ng2-adsense';
+import { AdsModule } from '../ads/ads.module';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     RouterModule,
     AgmCoreModule,
     PostsRoutingModule,
-    SharedModule
+    SharedModule,
+    AdsModule
   ],
   providers:[
     TitleCasePipe
