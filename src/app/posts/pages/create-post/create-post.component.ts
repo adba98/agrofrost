@@ -16,6 +16,7 @@ import { AgricultureService } from 'src/app/services/agriculture.service';
 import { FirebaseRealtimeDBService } from 'src/app/services/firebase-realtime-db.service';
 import { DepatamentosYmunicipiosService, MunicipioInfo } from 'src/app/services/depatamentos-ymunicipios.service';
 import { GeoCode, Post, Caracteristicas, Ubicacion, UserInfo } from '../../interfaces/post.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-create-post',
@@ -56,6 +57,7 @@ export class CreatePostComponent implements OnInit {
     private sAgriculture: AgricultureService,
     private sFDB: FirebaseRealtimeDBService,
     private sDM: DepatamentosYmunicipiosService,
+    private sAuth: AuthService
   ) {
 
     this.createForm();
@@ -228,14 +230,16 @@ export class CreatePostComponent implements OnInit {
     }
     let data_user: UserInfo = {
       celular: this.forma.get('celular')!.value,
-      correo: sessionStorage.getItem('emailUser') || localStorage.getItem('token') || 'error',
-      nombre: 'Usuario Pruebas'
+      correo: this.sAuth.currentUser!.email,
+      nombre: `${this.sAuth.userInfo.firstName } ${this.sAuth.userInfo.lastName}`
+      
     }
 
     
 
     let body: Post = {
       tipo_post: this.forma.get('tipo_post')!.value,
+      fecha_post: new Date,
       cultivo_info: this.cultivoSeleccionado,
       cantidad: this.forma.get('cantidad')!.value,
       precio: this.forma.get('precio')!.value,

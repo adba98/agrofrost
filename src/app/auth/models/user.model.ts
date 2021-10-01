@@ -1,4 +1,5 @@
-export class UserRegisterModel {
+export class UserModel {
+
   public firstName: string;
   public lastName: string;
 
@@ -10,18 +11,9 @@ export class UserRegisterModel {
   constructor() {
     this.firstName = '';
     this.lastName = '';
-    this.municipality = 'Venecia';
+    this.municipality = '';
     this.email = '';
     this.password = '';
   }
 }
-export class UserLoginModel {
 
-  public email: string;
-  public password: string;
-
-  constructor() {
-    this.email = '';
-    this.password = '';
-  }
-}

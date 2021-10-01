@@ -104,8 +104,7 @@
                   [minZoom]="9"
                   [usePanning]="true"
                 >
-                  <!-- TODO:Auto direecionar al municipio por medio del mapa  -->
-
+                 
                   <agm-marker
                     [latitude]="post.ubicacion.geolocalizacion.lat"
                     [longitude]="post.ubicacion.geolocalizacion.lng"
@@ -124,7 +123,9 @@
             </div>
 
             <div class="row mt-5">
-              <button class="btn btn-primary w-100" type="button">
+              <button class="btn btn-primary w-100" type="button"
+              (click)="showOwnerInfo()"
+              >
                 <i class="icon-basket"></i>Contactar
               </button>
             </div>

@@ -15,6 +15,7 @@ import { AdsSquareComponent } from './ads-square/ads-square.component';
    
     AdsenseModule.forRoot({
       adClient: 'ca-pub-1885720016268385',
+      
     
     })
   ],

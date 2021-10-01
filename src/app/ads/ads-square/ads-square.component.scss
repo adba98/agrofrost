@@ -1,16 +1,14 @@
 @import "src/styles";
 
-div.ads-square{
-    height: 100%;
+div.ads-square {
+  height: 100%;
 
-    background-color: rgba($color: gray, $alpha: .1);
-    border-radius: 10px;
-  
-
+  background-color: rgba($color: gray, $alpha: 0.1);
+  border-radius: 10px;
 }
-p{
-    text-align: center;
-    font-size: smaller;
-    font-weight: bolder;
-    
+p {
+  padding-top: 20px;
+  text-align: center;
+  font-size: smaller;
+  font-weight: bolder;
 }

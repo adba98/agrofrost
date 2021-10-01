@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import Swal from 'sweetalert2';
 
-import { UserLoginModel } from '../../models/user.model';
+import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 
 
@@ -17,7 +17,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./singin.component.scss'],
 })
 export class SinginComponent implements OnInit {
-  public user: UserLoginModel;
+  public user: UserModel;
   public remindMe!: boolean;
   private routerRedirectUrl!: string;
 
@@ -27,7 +27,7 @@ export class SinginComponent implements OnInit {
     private router: Router
   ) {
     
-    this.user = new UserLoginModel();
+    this.user = new UserModel();
     this.remindMe = false;
    
     if (localStorage.getItem('user')) {

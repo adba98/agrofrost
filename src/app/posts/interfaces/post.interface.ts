@@ -2,6 +2,7 @@ import { Cultivo } from '../../models/RestAgricultureResponse.interace';
 export interface Post {
     id?: string
     tipo_post: string;
+    fecha_post: Date;
 
     cultivo_info: Cultivo;
 
@@ -14,6 +15,8 @@ export interface Post {
    
     ubicacion: Ubicacion;
     post_owner: UserInfo;
+
+    publicitado?: boolean;
 }
 
 export interface Caracteristicas{

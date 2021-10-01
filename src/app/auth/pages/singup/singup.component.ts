@@ -10,7 +10,7 @@ import {
 } from 'src/app/services/depatamentos-ymunicipios.service';
 
 import { AuthService } from '../../services/auth.service';
-import { UserRegisterModel } from '../../models/user.model';
+import { UserModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-singup',
@@ -18,7 +18,7 @@ import { UserRegisterModel } from '../../models/user.model';
   styleUrls: ['./singup.component.scss'],
 })
 export class SingupComponent implements OnInit {
-  public user: UserRegisterModel;
+  public user: UserModel;
   public acceptTerms;
   municipios: string[] = [];
 
@@ -28,7 +28,7 @@ export class SingupComponent implements OnInit {
     private router: Router
     
     ) {
-    this.user = new UserRegisterModel();
+    this.user = new UserModel();
     this.acceptTerms= false;
   }
 
@@ -37,17 +37,14 @@ export class SingupComponent implements OnInit {
       .getMunicipiosByDepartamento()
       .subscribe((data: MunicipioInfo[]) => {
         this.municipios = data.map((m: MunicipioInfo) => m?.municipio || '');
-        this.municipios = this.municipios.sort();
-
-        this.municipios.unshift(' -- Seleccione un Municipio --');
-      
+        this.municipios = this.municipios.sort();   
       });
   }
 
   ngOnRegisterBasic(form: NgForm) {
     console.log(form);
     if (form.invalid) {
-      console.log('Formulario no valiido');
+      console.log('Formulario no valido');
       return;
     }
 
@@ -60,6 +57,8 @@ export class SingupComponent implements OnInit {
       });
 
       Swal.showLoading();
+    //  this.user.municipality = form.getControl('municipality').value;
+
       this.auth.createUserWithEmail(this.user)
       .subscribe(
         (res) => {

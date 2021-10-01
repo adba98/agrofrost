@@ -64,12 +64,13 @@
 
         <div class="mb-3">
           <label class="form-label" for="municipality">Municipio</label>
+       
           <select
             class="form-control item"
             type="text"
             id="municipality"
             required
-            [(ngModel)]="municipios[0]"
+            [(ngModel)]="user.municipality"
             name="municipality"
             [disabled]="municipios.length === 0"
             #selectorMunicipios="ngModel"
@@ -77,7 +78,9 @@
               regsiterForm.submitted && selectorMunicipios.untouched
             "
           >
-            <option *ngFor="let item of municipios" [value]="item">
+                 <option hidden value="" disabled selected> -- Seleccione un Municipio --</option>
+
+          <option *ngFor="let item of municipios" [value]="item">
               {{ item }}
             </option>
           </select>

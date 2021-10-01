@@ -17,6 +17,7 @@ import { CultivoPipe } from '../posts/pipes/Cultivo.pipe';
 import { PostsModule } from '../posts/posts.module';
 import { TermsComponent } from './terms/terms.component';
 import { AdsModule } from '../ads/ads.module';
+import { NewsModule } from '../news/news.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AdsModule } from '../ads/ads.module';
   imports: [CommonModule, [RouterModule], FormsModule,
     SharedModule,
   PostsModule,
-  AdsModule
+  AdsModule,
+  NewsModule
   ],
   
   exports: [

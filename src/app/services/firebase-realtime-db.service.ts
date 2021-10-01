@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Post } from '../posts/interfaces/post.interface';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseRealtimeDBService {
 
-  private url = 'https://agrofrost-a5c31-default-rtdb.firebaseio.com/api';
+  private url = `${environment.firebaseConfig.databaseURL}/api`
   constructor(private http: HttpClient) {
   }
 
@@ -28,9 +29,6 @@ export class FirebaseRealtimeDBService {
       })
 
     );
-
-
-
   }
   getAllPost(): Observable<Post[]> {
     return this.http.get(`${this.url}/post.json`)

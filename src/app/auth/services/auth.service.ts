@@ -2,10 +2,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, subscribeOn, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { UserLoginModel, UserRegisterModel } from '../models/user.model';
+import { UserModel } from '../models/user.model';
+import { UserService } from './user.service';
 
 
 
@@ -21,51 +22,63 @@ export class AuthService {
 
   private userToken!: string;
 
+
   readonly LS_TOKENKEY: string = 'token';
   readonly LS_EXPIRATIONTIME: string = 'expiration';
+  readonly SS_EMAIL: string = 'email';
 
   userTryToEnter: string = '';
+  public currentUser:SingUpOrIn | null = null;
+  public userInfo!: UserModel;
 
   public changingLoginStatusSubject = new Subject<boolean>();
   public changingLoginStatus$ = this.changingLoginStatusSubject.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private dbUsers:UserService) {
     if (this.isLogginIn('')) {
       this.changingLoginStatusSubject.next(true);
       console.log("sigue activvo");
     }
   }
 
-  createUserWithEmail(newUser: UserRegisterModel) {
+  createUserWithEmail(user: UserModel) {
     //https://firebase.google.com/docs/reference/rest/auth#section-create-email-password
     const body = {
-      ...newUser, // extrae email and password, eduiante spread
+      ...user, // extrae email and password, eduiante spread
       returtSecuredToken: true,
     };
-
+    
     return this.http.post(`${this.url}:signUp?key=${this.apikey}`, body).pipe(
       map((res: any) => {
         if (res.idToken) {
-          this.saveToken(res?.idToken);
+          this.saveToken(res);
+
+          let t : SingUpOrIn = res
+          this.userInfo = user;
+          this.dbUsers.create(t.localId,user).subscribe(r => console.log);
         }
         return res;
       })
     );
   }
-  loginUserWithEmail(user: UserLoginModel) {
+  loginUserWithEmail(user: UserModel) {
     const body = {
-      ...user, // extrae email and password, eduiante spread
+      ...user, // extrae email and password, mediante spread
       returtSecuredToken: true,
     };
 
     // podrria hacerlo con verify password
     return this.http
-      .post(`${this.url}:signInWithPassword?key=${this.apikey}`, body)
+      .post<SingUpOrIn>(`${this.url}:signInWithPassword?key=${this.apikey}`, body)
       .pipe(
-        map((res: any) => {
-          if (res.idToken) {
-            this.saveToken(res?.idToken);
+        map((res:any) => {
+          if (res?.idToken) {
+            this.saveToken(res);
+           
+
           }
+          console.log(res);
+          
           return res;
         })
       );
@@ -74,24 +87,28 @@ export class AuthService {
     console.log("cierra sesion");
     localStorage.removeItem(this.LS_TOKENKEY);
     this.changingLoginStatusSubject.next(false);
+    this.currentUser = null; 
   }
 
-  private saveToken(idToken: string) {
-    this.userToken = idToken;
+  private saveToken(tokenResponse:SingUpOrIn) {
 
-    localStorage.setItem(this.LS_TOKENKEY, idToken);
+    this.userToken = tokenResponse.idToken;
+
+    localStorage.setItem(this.LS_TOKENKEY, tokenResponse.idToken);
     this.changingLoginStatusSubject.next(true);
   
 
     const exp: number = new Date().setSeconds(this.timeToLogout);
     localStorage.setItem(this.LS_EXPIRATIONTIME, exp.toString());
+
+    this.currentUser= tokenResponse;
   }
 
 
   private readToken(): string {
 
-    if (localStorage.getItem('token')) {
-      this.userToken = localStorage.getItem('token') || "";
+    if (localStorage.getItem(this.LS_TOKENKEY)) {
+      this.userToken = localStorage.getItem(this.LS_TOKENKEY) || "";
     } else {
       this.userToken = '';
     }
@@ -116,13 +133,14 @@ export class AuthService {
   }
 }
 
-export interface SingOK {
+export interface SingUpOrIn{
   kind: string;
   idToken: string;
   email: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
+  registered: boolean;
 }
 
 

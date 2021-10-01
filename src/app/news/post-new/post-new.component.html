@@ -1,0 +1,30 @@
+<div class="mt-5 main">
+  <h2 class="text-center text-info">Noticias de interés</h2>
+
+  <div [ngClass]="{ 'show-less': showShortDesciption }">
+    <div class="news mt-4">
+      <div class="card" *ngFor="let new of news">
+       
+<!-- TODO: aplica blur back groud  -->
+          <img
+          style="background-image: url('{{ new.urlToImage }}');     
+          filter: blur(0px);"
+          class="card-img-top"
+          src="{{ new.urlToImage }}"
+          alt="{{ new.urlToImage || 'Sin imagen' }}"
+          />
+     
+        <div class="card-body">
+          <h5 class="card-title">{{ new.title }}</h5>
+          <p class="card-text">{{ new.description }}</p>
+          <a href="{{ new.url }}" class="btn btn-primary w-100">Ver más</a>
+        </div>
+      </div>
+    </div>
+    <div class="btn-show-less-more">
+      <button type="button" (click)="alterDescriptionText()">
+        {{ showShortDesciption ? "Mostrar más" : "Mostrar menos" }}
+      </button>
+    </div>
+  </div>
+</div>

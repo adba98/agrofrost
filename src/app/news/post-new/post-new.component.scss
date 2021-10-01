@@ -1,0 +1,93 @@
+@import "src/styles";
+
+
+.main{
+    margin: 100px;
+}
+.news {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  column-gap: 20px;
+  row-gap: 20px;
+ 
+
+  @include media-breakpoint-down(x-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include media-breakpoint-down(md) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.show-less {
+  height: 860px;
+  overflow: hidden;
+  position: relative;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr; 
+;
+}
+
+.show-less .btn-show-less-more {
+  position: absolute;
+  bottom: 0;
+
+//   background: linear-gradient(
+//     to bottom,
+//     transparent,
+//     rgba(246, 246, 246, 0.3) 20%,
+//     #f6f6f6
+//   );
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  border-style: none;
+  background: #f6f6f6;
+  box-shadow: 0 -30px 30px 20px #f6f6f6;
+  width: 100%;
+  color:  $color-verde-claro;
+  font-weight: bolder;
+  border-top: 1px solid $color-verde-claro;
+  border-bottom: 1px solid $color-verde-claro;
+}
+.card img {
+  min-height: 200px;
+  max-height: 200px;
+  width: fit-content;
+  max-width: 100%;
+  margin: auto;
+
+  background-image: radial-gradient(
+    rgba(230, 230, 230, 0.3),
+    rgba(39, 39, 72, 0.2)
+  );
+  //filter: blur(8px);
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card {
+  min-height: 500px;
+  max-height: 5 00px;
+}
+
+.card-title {
+  min-height: 120px;
+}
+
+.card-text {
+  min-height: 120px;
+  max-height: 120px;
+  overflow: hidden;
+}
